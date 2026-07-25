@@ -1,0 +1,46 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --navy: #1d2d5a;
+  --red: #e63946;
+  --coral: #e05a44;
+  --yellow: #fbbf24;
+  --green: #16a34a;
+  --blue: #2563eb;
+  --orange: #f97316;
+  --bg: #faf9f6;
+  --bg-cream: #faf4ec;
+  --border: #e8e4dc;
+  --text-muted: #6b7280;
+  --white: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: var(--white);
+  color: var(--navy);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
