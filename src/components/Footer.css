@@ -1,5 +1,5 @@
 .footer {
-  background: var(--white);
+  background: var(--bg);
   border-top: 1px solid var(--border);
   padding: 3rem 1.5rem 0;
 }
@@ -55,15 +55,16 @@
   max-width: 180px;
 }
 
-.footer-deco {
-  font-size: 1.5rem;
-  margin-top: 0.5rem;
-}
-
 .footer-col {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  position: relative;
+  left: -60px;
+}
+
+.footer-col:last-child {
+  left: 0;
 }
 
 .footer-col-heading {
@@ -107,8 +108,8 @@
 }
 
 .footer-social-img {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
 }
 
@@ -130,7 +131,7 @@
 }
 
 .footer-legal {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.75rem;

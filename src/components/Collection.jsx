@@ -2,14 +2,6 @@ import { useLanguage } from "../context/LanguageContext";
 import { IMG } from "../assets/images";
 import "./Collection.css";
 
-const BOOK_IMAGES = [
-  IMG.bookUnicornios,
-  IMG.bookDinosaurios,
-  IMG.bookGranja,
-  IMG.bookMonster,
-  IMG.bookVehiculos,
-];
-
 export default function Collection() {
   const { t } = useLanguage();
   const c = t.collection;
@@ -26,16 +18,12 @@ export default function Collection() {
         <a href="#" className="collection-link">{c.viewAll}</a>
       </div>
 
-      <div className="collection-grid container">
-        {c.books.map((book, i) => (
-          <div key={i} className="book-card">
-            <img
-              src={BOOK_IMAGES[i]}
-              alt={book.title.replace("\n", " ")}
-              className="book-cover"
-            />
-          </div>
-        ))}
+      <div className="collection-img-wrapper container">
+        <img
+          src={IMG.coleccion}
+          alt="Nuestra colección de libros para colorear"
+          className="collection-img"
+        />
       </div>
     </section>
   );

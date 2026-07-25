@@ -12,7 +12,7 @@
   --green: #16a34a;
   --blue: #2563eb;
   --orange: #f97316;
-  --bg: #faf9f6;
+  --bg: #faf9f8;
   --bg-cream: #faf4ec;
   --border: #e8e4dc;
   --text-muted: #6b7280;
@@ -25,7 +25,7 @@ html {
 
 body {
   font-family: "Nunito", sans-serif;
-  background-color: var(--white);
+  background-color: var(--bg);
   color: var(--navy);
   line-height: 1.6;
 }

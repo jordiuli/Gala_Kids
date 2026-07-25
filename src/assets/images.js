@@ -5,8 +5,8 @@ export const IMG = {
   logoHorizontal:  img("LOGO HORIZONTAL.png"),
   logoVertical:    img("LOGO VERTICAL.png"),
   cabecera:        img("CABECERA.png"),
-  titulo:          img("TÍTULO.png"),
-  coleccion:       img("COLECCIÓN..png"),
+  titulo:          img("TITULO.png"),
+  coleccion:       img("COLECCION.png"),
 
   bookUnicornios:  img("LIBRO UNICORNIOS ADORABLES.png"),
   bookDinosaurios: img("LIBRO DINOSAURIOS.png"),
@@ -18,5 +18,6 @@ export const IMG = {
   instagram:       img("LOGO INSTAGRAM.png"),
   amazon:          img("LOGO AMAZON.png"),
   pinterestBN:     img("LOGO PINTEREST B_N.png"),
+  instagramBN:     img("N.png"),
   amazonBN:        img("LOGO AMAZON B_N.png"),
 };

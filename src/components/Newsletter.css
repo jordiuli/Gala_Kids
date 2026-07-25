@@ -1,7 +1,5 @@
 .newsletter {
-  background: var(--bg-cream);
-  padding: 3rem 1.5rem;
-  border-top: 1px solid var(--border);
+  display: none;
 }
 
 .newsletter-inner {

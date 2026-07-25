@@ -3,9 +3,9 @@ import { IMG } from "../assets/images";
 import "./Footer.css";
 
 const SOCIAL = [
-  { src: IMG.pinterestBN, label: "Pinterest" },
-  { src: IMG.instagram,   label: "Instagram" },
-  { src: IMG.amazonBN,    label: "Amazon" },
+  { src: IMG.pinterestBN,  label: "Pinterest" },
+  { src: IMG.instagramBN,  label: "Instagram" },
+  { src: IMG.amazonBN,     label: "Amazon" },
 ];
 
 export default function Footer() {
@@ -20,7 +20,6 @@ export default function Footer() {
             <img src={IMG.logoVertical} alt="Gala Kids Books" className="footer-logo-img" />
           </div>
           <p className="footer-tagline">{f.tagline}</p>
-          <div className="footer-deco">🌸</div>
         </div>
 
         {f.cols.slice(0, 3).map((col) => (
