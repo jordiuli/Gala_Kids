@@ -1,6 +1,6 @@
 .benefits {
   padding: 2.5rem 1.5rem;
-  background: var(--white);
+  background: var(--bg);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }

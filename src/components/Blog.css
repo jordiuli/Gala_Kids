@@ -1,6 +1,6 @@
 .blog {
   padding: 4rem 1.5rem;
-  background: var(--white);
+  background: var(--bg);
   border-top: 1px solid var(--border);
 }
 

@@ -49,17 +49,6 @@ export default function Header() {
             ))}
           </div>
 
-          <div className="social-icons">
-            <a href="#" className="social-icon" aria-label="Pinterest">
-              <img src={IMG.pinterest} alt="Pinterest" className="social-img" />
-            </a>
-            <a href="#" className="social-icon" aria-label="Instagram">
-              <img src={IMG.instagram} alt="Instagram" className="social-img" />
-            </a>
-            <a href="#" className="social-icon" aria-label="Amazon">
-              <img src={IMG.amazon} alt="Amazon" className="social-img" />
-            </a>
-          </div>
         </div>
       </div>
     </header>
