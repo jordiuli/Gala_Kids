@@ -9,12 +9,7 @@ export default function Collection() {
   return (
     <section className="collection" id="coleccion">
       <div className="collection-header container">
-        <h2 className="collection-title">
-          {c.title}{" "}
-          <span className="collection-title-cursive">{c.titleCursive}</span>
-          <span className="collection-deco-left"> ✦</span>
-          <span className="collection-deco-right">✦ </span>
-        </h2>
+        <img src={IMG.miColeccion} alt="Mi colección" className="collection-title-img" />
         <a href="#" className="collection-link">{c.viewAll}</a>
       </div>
 
