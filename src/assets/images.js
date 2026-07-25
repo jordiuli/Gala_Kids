@@ -7,6 +7,7 @@ export const IMG = {
   cabecera:        img("CABECERA.png"),
   titulo:          img("TITULO.png"),
   coleccion:       img("COLECCION.png"),
+  miColeccion:     img("MI COLECCION.png"),
 
   bookUnicornios:  img("LIBRO UNICORNIOS ADORABLES.png"),
   bookDinosaurios: img("LIBRO DINOSAURIOS.png"),
@@ -19,5 +20,5 @@ export const IMG = {
   amazon:          img("LOGO AMAZON.png"),
   pinterestBN:     img("LOGO PINTEREST B_N.png"),
   instagramBN:     img("N.png"),
-  amazonBN:        img("LOGO AMAZON B_N.png"),
+  amazonBN:        img("LOGO AMAZON B_N_2.png"),
 };
