@@ -19,30 +19,14 @@
 
 .logo {
   display: flex;
-  flex-direction: column;
-  line-height: 1.1;
+  align-items: center;
   min-width: 120px;
 }
 
-.logo-brand {
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: var(--navy);
-  letter-spacing: -0.5px;
-}
-
-.logo-star {
-  color: var(--yellow);
-  font-size: 1rem;
-  vertical-align: super;
-}
-
-.logo-sub {
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--navy);
-  text-align: center;
+.logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
 }
 
 .nav {
@@ -125,7 +109,6 @@
 }
 
 .social-icon {
-  color: var(--navy);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,4 +117,10 @@
 
 .social-icon:hover {
   opacity: 0.6;
+}
+
+.social-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }

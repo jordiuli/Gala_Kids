@@ -1,5 +1,6 @@
 import { useLanguage } from "../context/LanguageContext";
 import { colorizeWord } from "../i18n/translations";
+import { IMG } from "../assets/images";
 import "./Hero.css";
 
 const ColorLetter = ({ letter, color }) => (
@@ -44,7 +45,7 @@ export default function Hero() {
           <div className="hero-deco hero-deco--flower1">🌸</div>
           <div className="hero-photo-wrapper">
             <img
-              src="https://placehold.co/540x600/f0e4d0/1d2d5a?text=Hero"
+              src={IMG.cabecera}
               alt={imgAlt}
               className="hero-photo"
             />

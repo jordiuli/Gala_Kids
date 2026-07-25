@@ -1,5 +1,14 @@
 import { useLanguage } from "../context/LanguageContext";
+import { IMG } from "../assets/images";
 import "./Collection.css";
+
+const BOOK_IMAGES = [
+  IMG.bookUnicornios,
+  IMG.bookDinosaurios,
+  IMG.bookGranja,
+  IMG.bookMonster,
+  IMG.bookVehiculos,
+];
 
 export default function Collection() {
   const { t } = useLanguage();
@@ -19,19 +28,12 @@ export default function Collection() {
 
       <div className="collection-grid container">
         {c.books.map((book, i) => (
-          <div key={i} className="book-card" style={{ backgroundColor: book.bg }}>
-            <div className="book-badge">BIG &amp; EASY</div>
-            <div className="book-emoji">{book.emoji}</div>
-            <h3 className="book-title">
-              {book.title.split("\n").map((line, j) => (
-                <span key={j}>{line}<br /></span>
-              ))}
-            </h3>
-            <div className="book-label">{c.label}</div>
-            <div className="book-age">
-              <span>{c.ageLabel}</span><br />
-              <span>{c.ageRange}</span>
-            </div>
+          <div key={i} className="book-card">
+            <img
+              src={BOOK_IMAGES[i]}
+              alt={book.title.replace("\n", " ")}
+              className="book-cover"
+            />
           </div>
         ))}
       </div>

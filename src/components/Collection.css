@@ -59,75 +59,23 @@
 
 .book-card {
   border-radius: 10px;
-  padding: 1rem 0.75rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  position: relative;
+  overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   transition: transform 0.15s, box-shadow 0.15s;
   cursor: pointer;
+  background: var(--white);
 }
 
 .book-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.14);
 }
 
-.book-badge {
-  background: var(--red);
-  color: var(--white);
-  font-size: 0.55rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  padding: 0.2rem 0.5rem;
-  border-radius: 3px;
-  align-self: stretch;
-  text-align: center;
-}
-
-.book-emoji {
-  font-size: 3.5rem;
-  line-height: 1;
-  margin: 0.25rem 0;
-}
-
-.book-title {
-  font-size: 0.88rem;
-  font-weight: 900;
-  color: var(--navy);
-  text-align: center;
-  line-height: 1.2;
-}
-
-.book-label {
-  background: var(--red);
-  color: var(--white);
-  font-size: 0.55rem;
-  font-weight: 800;
-  padding: 0.15rem 0.55rem;
-  border-radius: 20px;
-}
-
-.book-age {
-  position: absolute;
-  bottom: 0.6rem;
-  right: 0.6rem;
-  background: #16a34a;
-  color: var(--white);
-  font-size: 0.5rem;
-  font-weight: 800;
-  text-align: center;
-  line-height: 1.2;
-  padding: 0.3rem 0.45rem;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.book-cover {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 @media (max-width: 900px) {
