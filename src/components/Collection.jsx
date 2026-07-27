@@ -10,7 +10,7 @@ export default function Collection() {
     <section className="collection" id="coleccion">
       <div className="collection-header container">
         <img src={IMG.miColeccion} alt="Mi colección" className="collection-title-img" />
-        <a href="#" className="collection-link">{c.viewAll}</a>
+        <a href="https://www.amazon.es/stores/Gala-Stone/author/B0H6TD32HX?ref=sr_ntt_srch_lnk_13&shoppingPortalEnabled=true" className="collection-link" target="_blank" rel="noopener noreferrer">{c.viewAll}</a>
       </div>
 
       <div className="collection-img-wrapper container">

@@ -3,9 +3,9 @@ import { IMG } from "../assets/images";
 import "./Footer.css";
 
 const SOCIAL = [
-  { src: IMG.pinterestBN,  label: "Pinterest" },
-  { src: IMG.instagramBN,  label: "Instagram" },
-  { src: IMG.amazonBN,     label: "Amazon" },
+  { src: IMG.pinterestBN,  label: "Pinterest", href: "https://es.pinterest.com/galakids/" },
+  { src: IMG.instagramBN,  label: "Instagram", href: "#" },
+  { src: IMG.amazonBN,     label: "Amazon",    href: "https://www.amazon.es/stores/Gala-Stone/author/B0H6TD32HX?ref=sr_ntt_srch_lnk_13&shoppingPortalEnabled=true" },
 ];
 
 export default function Footer() {
@@ -38,8 +38,8 @@ export default function Footer() {
         <div className="footer-col">
           <h4 className="footer-col-heading">{f.cols[3].heading}</h4>
           <div className="footer-social">
-            {SOCIAL.map(({ src, label }) => (
-              <a key={label} href="#" className="footer-social-icon" aria-label={label}>
+            {SOCIAL.map(({ src, label, href }) => (
+              <a key={label} href={href} className="footer-social-icon" aria-label={label} target={href !== "#" ? "_blank" : undefined} rel={href !== "#" ? "noopener noreferrer" : undefined}>
                 <img src={src} alt={label} className="footer-social-img" />
               </a>
             ))}

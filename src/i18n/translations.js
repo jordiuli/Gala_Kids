@@ -32,7 +32,7 @@ export const translations = {
     collection: {
       title: "La nostra",
       titleCursive: "col·lecció",
-      viewAll: "VEURE COL·LECCIÓ COMPLETA →",
+      viewAll: "VEURE COL·LECCIÓ COMPLETA A AMAZON →",
       label: "Coloring Book",
       ageLabel: "anys",
       ageRange: "3-5",
@@ -125,7 +125,7 @@ export const translations = {
     collection: {
       title: "Nuestra",
       titleCursive: "colección",
-      viewAll: "VER COLECCIÓN COMPLETA →",
+      viewAll: "VER COLECCIÓN COMPLETA EN AMAZON →",
       label: "Coloring Book",
       ageLabel: "Ages",
       ageRange: "3-5",
@@ -218,7 +218,7 @@ export const translations = {
     collection: {
       title: "Our",
       titleCursive: "collection",
-      viewAll: "SEE FULL COLLECTION →",
+      viewAll: "SEE FULL COLLECTION ON AMAZON →",
       label: "Coloring Book",
       ageLabel: "Ages",
       ageRange: "3-5",
@@ -311,7 +311,7 @@ export const translations = {
     collection: {
       title: "Notre",
       titleCursive: "collection",
-      viewAll: "VOIR LA COLLECTION COMPLÈTE →",
+      viewAll: "VOIR LA COLLECTION COMPLÈTE SUR AMAZON →",
       label: "Livre de coloriage",
       ageLabel: "Âges",
       ageRange: "3-5",
