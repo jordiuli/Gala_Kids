@@ -88,8 +88,11 @@
   }
 
   .hero-titulo-img {
-    width: 80%;
+    width: 70%;
+    max-width: 280px;
+    margin-top: 0;
     margin-bottom: 1rem;
+    left: 0;
   }
 
   .hero-subtitle {
