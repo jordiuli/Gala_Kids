@@ -27,20 +27,21 @@
   justify-content: center;
   padding: 2% 2% 2% 4%;
   gap: 0;
-  background: linear-gradient(
-    to right,
-    rgba(250, 249, 248, 0.95) 55%,
-    rgba(250, 249, 248, 0.7) 80%,
-    transparent
-  );
+  background: linear-gradient(to right,
+      rgba(250, 249, 248, 0.95) 55%,
+      rgba(250, 249, 248, 0.7) 80%,
+      transparent);
 }
 
 .hero-titulo-img {
-  width: 135%;
+  width: 42vw;
+  max-width: none;
   height: auto;
   display: block;
   margin-bottom: 4%;
-  margin-top: -8%;
+  margin-top: -60%;
+  position: relative;
+  left: -18%;
 }
 
 .hero-subtitle {
