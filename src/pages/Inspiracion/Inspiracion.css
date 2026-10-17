@@ -1,7 +1,7 @@
 /* ===== Pàgina Inspiración (prefix .insp-*) ===== */
 .insp {
   --insp-purple: #8b5cf6;
-  --insp-sky: #eaf3fb;
+  --insp-sky: #ecf5fc; /* coincideix amb el fons de featured-dino.webp */
   --insp-radius: 14px;
   --insp-shadow: 0 6px 20px rgba(29, 45, 90, 0.08);
   --insp-claim: "SilverKids", "Caveat", cursive;
@@ -13,7 +13,7 @@
   --insp-claim-5: #9870a8; /* lila */
   --insp-claim-6: #5890c0; /* blau clar */
   --insp-claim-7: #1d3868; /* navy (també puntuació) */
-  background: var(--white);
+  background: var(--bg); /* mateix fons que body / About Us */
   color: var(--navy);
   overflow-x: hidden;
   padding-bottom: 48px;
@@ -125,7 +125,7 @@
   position: relative;
   z-index: 2;
   padding: 64px 24px 48px 0;
-  margin-left: clamp(24px, 3vw, 64px);
+  margin-left: clamp(48px, 6vw, 120px);
 }
 .insp-hero .insp-color-title {
   font-size: clamp(2.6rem, 4.6vw, 4rem);
@@ -239,8 +239,8 @@
 .insp-featured {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
+  grid-template-columns: minmax(0, 56%) minmax(0, 44%);
+  align-items: stretch;
   background: var(--insp-sky);
   border-radius: var(--insp-radius);
   overflow: hidden;
@@ -253,6 +253,7 @@
 }
 .insp-featured__content {
   position: relative;
+  align-self: center;
   padding: 32px 48px 32px 100px;
 }
 .insp-featured--noimg .insp-featured__content {
@@ -280,11 +281,19 @@
   top: 26px;
   right: 30px;
 }
-.insp-featured__media,
+.insp-featured__media {
+  position: relative;
+  min-height: 200px;
+}
 .insp-featured__media img {
+  position: absolute;
+  inset: 0;
   height: 100%;
   width: 100%;
   object-fit: cover;
+  object-position: right center;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 8%, rgba(0, 0, 0, 0.8) 16%, #000 24%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 8%, rgba(0, 0, 0, 0.8) 16%, #000 24%);
 }
 
 /* ===== 4. FAMILIAS ===== */
@@ -367,7 +376,7 @@
   display: grid;
   grid-template-columns: minmax(0, 45%) minmax(0, 55%);
   align-items: stretch;
-  background: var(--bg-cream);
+  background: var(--bg); /* sense crema: es fon amb el fons de la pàgina */
   border-radius: var(--insp-radius);
   overflow: hidden;
   min-height: 140px;
@@ -394,8 +403,9 @@
   min-height: 260px;
   object-fit: cover;
   object-position: center 40%;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+  --insp-fade: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.06) 6%, rgba(0, 0, 0, 0.22) 13%, rgba(0, 0, 0, 0.48) 21%, rgba(0, 0, 0, 0.75) 29%, rgba(0, 0, 0, 0.93) 36%, #000 42%);
+  -webkit-mask-image: var(--insp-fade);
+  mask-image: var(--insp-fade);
 }
 
 /* ===== RESPONSIVE ===== */
@@ -449,6 +459,14 @@
   .insp-featured__star1 { left: 16px; top: 14px; }
   .insp-featured__star2 { right: 16px; bottom: 14px; }
   .insp-featured__cloud { display: none; }
+  .insp-featured__media {
+    min-height: 0;
+    aspect-ratio: 5 / 2;
+  }
+  .insp-featured__media img {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 12%, #000 25%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 12%, #000 25%);
+  }
 
   .insp-families__grid {
     grid-template-columns: 1fr;
@@ -467,8 +485,7 @@
     margin-right: auto;
   }
   .insp-download__media img {
-    -webkit-mask-image: none;
-    mask-image: none;
+    --insp-fade: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 8%, rgba(0, 0, 0, 0.75) 16%, #000 24%);
   }
 }
 

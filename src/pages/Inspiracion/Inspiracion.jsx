@@ -17,8 +17,8 @@ const FAMILY_IMG = ["familia-sabado.webp", "familia-caja.webp", "familia-recuerd
 const QUOTE_ICON = ["heart", "pencil", "people", "star"];
 const DOWNLOAD_HREF = "#"; // pendent: URL del PDF descarregable
 
-// Imatge del bloc destacat (dinosaure): encara no disponible -> null
-const FEATURED_IMAGE = null;
+// Imatge del bloc destacat (nena + dinosaure). Substituir per l'original quan arribi.
+const FEATURED_IMAGE = "featured-dino.webp"; // retall escalat de BOCETO.png (provisional)
 
 const COLORS = ["red", "blue", "yellow", "green", "purple", "orange", "navy"];
 
@@ -222,7 +222,7 @@ export default function Inspiracion() {
       <section className="insp-container">
         <div className="insp-download">
           <div className="insp-download__content">
-            <ColorTitle lines={download.title} as="h2" className="insp-download__title" byWord />
+            <ColorTitle lines={download.title} as="h2" className="insp-download__title" />
             <p>{download.text}</p>
             <a href={download.href} className="insp-btn insp-btn--navy">
               {download.cta} <span aria-hidden="true">↓</span>
