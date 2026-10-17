@@ -332,8 +332,11 @@
   margin-left: 1.4em;
 }
 
+/* 2a frase enganxada a la 1a: la paraula petita queda a l'altura de la base de la gran */
 .about-stack__line--even {
-  margin-top: 0.05em;
+  position: relative;
+  z-index: 1; /* els accents (Ó, À...) queden per sobre de la 1a frase */
+  margin-top: -0.3em;
 }
 
 .about-stack__small {
@@ -403,8 +406,13 @@
   object-position: bottom;
 }
 
+/* dinosaure retallat al contingut (abans ~178px d'ample visible → ara el doble) */
 .about-close__dino {
   left: 2%;
+  bottom: 8px;
+  height: auto;
+  width: clamp(200px, 22vw, 316px);
+  max-width: none;
 }
 
 .about-close__cow {
@@ -459,13 +467,16 @@
   }
 
   .about-close {
-    padding-bottom: 150px;
+    padding-bottom: 230px;
   }
 
-  .about-close__dino,
   .about-close__cow {
     height: 130px;
     max-width: 40%;
+  }
+
+  .about-close__dino {
+    width: min(52%, 240px);
   }
 }
 
@@ -501,6 +512,6 @@
   }
 
   .about-stack__line--odd {
-    margin-left: 0.6em;
+    margin-left: 0.9em;
   }
 }
