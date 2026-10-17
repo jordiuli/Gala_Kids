@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 import { IMG } from "../../assets/images";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Contacto.css";
 
 const base = import.meta.env.BASE_URL;
@@ -19,66 +20,13 @@ const PINTEREST_URL = "https://es.pinterest.com/galakids/";
 const INSTAGRAM_URL = "#"; // pendent
 const CONTACT_EMAIL = ""; // pendent: si s'informa, el formulari obre el client de correu (mailto)
 
-// TODO traductor: textos a translations.js (de moment només castellà)
-const T = {
-  label: "CONTACTO",
-  title: "HABLEMOS",
-  subtitle: "Las mejores ideas siempre empiezan con una conversación.",
-  text1:
-    "Si tienes una pregunta, una propuesta o simplemente quieres saludarnos, estaremos encantados de leerte.",
-  text2:
-    "En Gala Kids creemos que cada familia tiene una historia diferente y nos encanta formar parte de ella.",
-  cta: "Escríbenos",
-  formTitleA: "Cuéntanos",
-  formTitleB: "cómo podemos ayudarte",
-  name: "Nombre",
-  email: "Correo electrónico",
-  subject: "Asunto",
-  message: "Mensaje",
-  send: "Enviar mensaje",
-  sent: "¡Gracias! Hemos recibido tu mensaje.",
-  sideTitle: "Te leemos siempre",
-  side1: "Respondemos a todos los mensajes lo antes posible.",
-  side2: "Tu mensaje es importante para nosotros y será leído con mucho cariño.",
-  otherTitle: "Otras formas de hablar",
-  cards: [
-    {
-      key: "amazon",
-      name: "Amazon",
-      text: "¿Has comprado uno de nuestros libros? Tu opinión ayuda muchísimo a otras familias.",
-      btn: "Ver colección",
-      url: AMAZON_URL,
-      img: pic("amazon.webp"),
-      logo: IMG.amazon,
-    },
-    {
-      key: "pinterest",
-      name: "Pinterest",
-      text: "Cada semana compartimos ideas nuevas para jugar, crear y aprender juntos.",
-      btn: "Inspirarte",
-      url: PINTEREST_URL,
-      img: pic("pinterest.webp"),
-      logo: IMG.pinterest,
-    },
-    {
-      key: "instagram",
-      name: "Instagram",
-      text: "Descubre el día a día de Gala Kids, novedades y mucho más.",
-      btn: "Seguir",
-      url: INSTAGRAM_URL,
-      img: pic("instagram.webp"),
-      logo: IMG.instagram,
-    },
-  ],
-  faqTitle: "Preguntas frecuentes",
-  faqs: [
-    { icon: "bag", q: "¿Dónde puedo comprar los libros?", a: "Actualmente toda la colección está disponible en Amazon." },
-    { icon: "globe", q: "¿En qué idiomas están disponibles?", a: "Español, inglés y francés, con nuevos idiomas en desarrollo." },
-    { icon: "smile", q: "¿Qué edades recomendáis?", a: "Principalmente entre los 3 y los 5 años, aunque muchos niños disfrutan los libros durante más tiempo." },
-    { icon: "mail", q: "¿Puedo escribir una propuesta?", a: "Por supuesto. Nos encanta descubrir nuevas ideas." },
-  ],
-  closing: "Cada mensaje que recibimos nos recuerda que detrás de cada libro hay una familia como la tuya.",
-};
+// Dades no traduïbles de les targetes i FAQ; els textos són a translations.js (t.contacto)
+const CARD_MEDIA = [
+  { key: "amazon", url: AMAZON_URL, img: pic("amazon.webp"), logo: IMG.amazon },
+  { key: "pinterest", url: PINTEREST_URL, img: pic("pinterest.webp"), logo: IMG.pinterest },
+  { key: "instagram", url: INSTAGRAM_URL, img: pic("instagram.webp"), logo: IMG.instagram },
+];
+const FAQ_ICONS = ["bag", "globe", "smile", "mail"];
 
 // Paleta del claim de la home (TITULO.png): --ct-claim-1..7 a Contacto.css
 const CLAIM_COLORS = 7;
@@ -136,6 +84,12 @@ const FIELDS = [
 ];
 
 export default function Contacto() {
+  const { t } = useLanguage();
+  const T = {
+    ...t.contacto,
+    cards: t.contacto.cards.map((c, i) => ({ ...c, ...CARD_MEDIA[i] })),
+    faqs: t.contacto.faqs.map((f, i) => ({ ...f, icon: FAQ_ICONS[i] })),
+  };
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
   const [open, setOpen] = useState(() => T.faqs.map(() => true));

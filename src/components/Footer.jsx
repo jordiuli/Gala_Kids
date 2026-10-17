@@ -3,9 +3,9 @@ import { IMG } from "../assets/images";
 import "./Footer.css";
 
 const SOCIAL = [
-  { src: IMG.pinterestBN,  label: "Pinterest", href: "https://es.pinterest.com/galakids/" },
-  { src: IMG.instagramBN,  label: "Instagram", href: "#" },
-  { src: IMG.amazonBN,     label: "Amazon",    href: "https://www.amazon.es/stores/Gala-Stone/author/B0H6TD32HX?ref=sr_ntt_srch_lnk_13&shoppingPortalEnabled=true" },
+  { src: IMG.pinterestBN, label: "Pinterest", href: "https://es.pinterest.com/galakids/" },
+  { src: IMG.instagramBN, label: "Instagram", href: "https://instagram.com/galakidsbooks/" },
+  { src: IMG.amazonBN, label: "Amazon", href: "https://www.amazon.es/stores/Gala-Stone/author/B0H6TD32HX?ref=sr_ntt_srch_lnk_13&shoppingPortalEnabled=true" },
 ];
 
 export default function Footer() {
