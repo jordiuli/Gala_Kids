@@ -10,7 +10,7 @@ export function colorizeWord(word) {
 export const translations = {
   ca: {
     nav: {
-      items: ["FILOSOFIA", "SOBRE NOSALTRES", "CONTACTE"],
+      items: ["FILOSOFIA", "INSPIRACIÓ", "SOBRE NOSALTRES", "CONTACTE"],
       active: null,
     },
     hero: {
@@ -103,7 +103,7 @@ export const translations = {
 
   es: {
     nav: {
-      items: ["FILOSOFÍA", "SOBRE NOSOTROS", "CONTACTO"],
+      items: ["FILOSOFÍA", "INSPIRACIÓN", "SOBRE NOSOTROS", "CONTACTO"],
       active: null,
     },
     hero: {
@@ -196,7 +196,7 @@ export const translations = {
 
   en: {
     nav: {
-      items: ["PHILOSOPHY", "ABOUT US", "CONTACT"],
+      items: ["PHILOSOPHY", "INSPIRATION", "ABOUT US", "CONTACT"],
       active: null,
     },
     hero: {
@@ -289,7 +289,7 @@ export const translations = {
 
   fr: {
     nav: {
-      items: ["PHILOSOPHIE", "À PROPOS", "CONTACT"],
+      items: ["PHILOSOPHIE", "INSPIRATION", "À PROPOS", "CONTACT"],
       active: null,
     },
     hero: {
