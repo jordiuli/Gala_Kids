@@ -1,76 +1,90 @@
+import { Fragment } from "react";
 import "./Filosofia.css";
+import { useLanguage } from "../../context/LanguageContext";
 
-const img = (name) => `${import.meta.env.BASE_URL}img/filosofia/${name}`;
+const base = import.meta.env.BASE_URL;
+const img = (name) => `${base}img/filosofia/${name}`;
 
-// Textos en castellà (pendent de moure a translations.js pel traductor)
-const VALUES = [
-  {
-    image: "vaca.png",
-    color: "olive",
-    title: "Crear sin miedo",
-    text: "No existe una forma correcta de colorear. Cada elección, cada trazo y cada color forman parte del aprendizaje.",
-  },
-  {
-    image: "monster-truck.png",
-    color: "orange",
-    title: "Aprender jugando",
-    text: "Mientras colorean, los niños practican la coordinación, la atención, la toma de decisiones y la confianza en sí mismos.",
-  },
-  {
-    image: "dinosaurio.png",
-    color: "navy",
-    title: "Imaginar más allá de la página",
-    text: "Un dibujo puede convertirse en una historia, un juego, una conversación o un recuerdo compartido.",
-  },
-  {
-    image: "cerdito.png",
-    color: "red",
-    title: "Compartir tiempo de calidad",
-    text: "Gala Kids no pretende sustituir la presencia del adulto. Pretende crear momentos para estar juntos de otra manera.",
-  },
+// SilverKids només als claims; s'injecta aquí perquè la ruta respecti BASE_URL ("/Gala_Kids/").
+// Fitxer: public/fonts/Silverkids.otf (respectar majúscules: GitHub Pages hi distingeix)
+const FONT_FACE = `@font-face {
+  font-family: "SilverKids";
+  src: url("${base}fonts/Silverkids.otf") format("opentype");
+  font-display: swap;
+}`;
+
+// Paleta del claim de la home (TITULO.png): --filo-claim-1..7 a Filosofia.css
+const CLAIM_COLORS = 7;
+const PUNCT = /[.,;:!?¿¡]/;
+const claimColor = (n) => `var(--filo-claim-${(n % CLAIM_COLORS) + 1})`;
+
+// Un color per lletra (o per paraula amb byWord), cíclic; puntuació en navy.
+// Els spans són aria-hidden: el contenidor porta el text sencer (aria-label o .filo-sr).
+function Claim({ text, offset = 0, byWord = false }) {
+  let n = offset;
+  return text.split(" ").map((word, w) => {
+    const wordColor = byWord ? claimColor(n++) : null;
+    return (
+      <Fragment key={w}>
+        {w > 0 && " "}
+        <span className="filo-claim-word" aria-hidden="true">
+          {[...word].map((c, i) => {
+            const color = PUNCT.test(c) ? "var(--filo-claim-7)" : wordColor || claimColor(n++);
+            return <span key={i} aria-hidden="true" style={{ color }}>{c}</span>;
+          })}
+        </span>
+      </Fragment>
+    );
+  });
+}
+
+// Dades no traduïbles dels valors; els textos són a translations.js (t.filosofia)
+const VALUE_MEDIA = [
+  { image: "vaca.png", color: "olive" },
+  { image: "monster-truck.png", color: "orange" },
+  { image: "dinosaurio.png", color: "navy" },
+  { image: "cerdito.png", color: "red" },
 ];
 
-const IDEAS = [
-  "Porque una tarde tranquila también puede ser una aventura.",
-  "Porque un dibujo puede iniciar una conversación.",
-  "Porque una página coloreada puede acabar colgada en una pared durante años.",
-  "Y porque, a veces, los recuerdos más importantes empiezan con algo tan sencillo como una caja de lápices y un poco de tiempo.",
-];
+// Offsets de color del claim: lletres (o paraules) que ja s'han pintat abans
+const letterCount = (s) => [...s].filter((c) => c !== " " && !PUNCT.test(c)).length;
+const wordCount = (lines) => lines.join(" ").split(" ").filter(Boolean).length;
 
 export default function Filosofia() {
+  const { t } = useLanguage();
+  const T = t.filosofia;
+  const VALUES = T.values.map((v, i) => ({ ...v, ...VALUE_MEDIA[i] }));
+  const IDEAS = T.ideas;
+  const MANIFESTO = T.manifesto;
   return (
     <div className="filosofia" id="filosofia">
+      <style>{FONT_FACE}</style>
       <section
         className="filo-hero"
         style={{ backgroundImage: `url(${img("principal.jpg")})` }}
       >
         <div className="filo-hero-content">
-          <p className="filo-eyebrow">Nuestra filosofía</p>
-          <h1 className="filo-title">
-            <span className="filo-navy">Menos pantallas.</span>
-            <span className="filo-olive">Más</span>{" "}
-            <span className="filo-orange">imaginación.</span>
+          <p className="filo-eyebrow">{T.eyebrow}</p>
+          <h1 className="filo-title filo-claim" aria-label={`${T.title1} ${T.title2}`}>
+            <Claim text={T.title1} />
+            <br />
+            <Claim text={T.title2} offset={letterCount(T.title1)} />
           </h1>
           <hr className="filo-rule" />
-          <p>
-            Creemos en una infancia con más lápices sobre la mesa, más historias
-            inventadas y más tiempo para crear sin prisas.
-          </p>
-          <p>
-            Gala Kids nace para acompañar esos pequeños momentos en los que un
-            niño se concentra, imagina, pregunta, colorea y convierte una página
-            en algo completamente suyo.
-          </p>
+          <p>{T.lead1}</p>
+          <p>{T.lead2}</p>
           <p className="filo-handwritten">
-            No queremos llenar el tiempo.
+            {T.hand1}
             <br />
-            Queremos ayudar a que cada niño lo transforme.
+            {T.hand2}
           </p>
         </div>
       </section>
 
       <section className="filo-values">
-        <h2 className="filo-section-title">Lo que defendemos</h2>
+        <h2 className="filo-section-title filo-claim" aria-label={T.valuesTitle}>
+          <Claim text={T.valuesTitle} />
+        </h2>
         <div className="filo-values-grid">
           {VALUES.map((v) => (
             <article key={v.title} className="filo-value">
@@ -83,11 +97,14 @@ export default function Filosofia() {
       </section>
 
       <section className="filo-manifesto">
-        <blockquote className="filo-quote">
-          No hacemos libros para mantener a los niños ocupados.
-          <br />
-          Los hacemos para que puedan crear, descubrir y sentirse orgullosos de
-          lo que son capaces de hacer.
+        <blockquote className="filo-quote filo-claim">
+          <span className="filo-sr">{MANIFESTO.join(" ")}</span>
+          {MANIFESTO.map((line, i) => (
+            <Fragment key={i}>
+              {i > 0 && <br />}
+              <Claim text={line} offset={wordCount(MANIFESTO.slice(0, i))} byWord />
+            </Fragment>
+          ))}
         </blockquote>
         <ul className="filo-ideas">
           {IDEAS.map((idea) => (

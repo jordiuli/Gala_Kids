@@ -1,25 +1,24 @@
+import { Fragment } from "react";
 import "./AboutUs.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const base = import.meta.env.BASE_URL;
 const img = (file) => `${base}img/about_us/${file}`;
 
+// SilverKids als claims: s'injecta aquí perquè la ruta respecti BASE_URL ("/Gala_Kids/").
+// Fitxer: public/fonts/Silverkids.otf (respectar majúscules: GitHub Pages hi distingeix)
+const FONT_FACE = `@font-face {
+  font-family: "SilverKids";
+  src: url("${base}fonts/Silverkids.otf") format("opentype");
+  font-display: swap;
+}`;
+
 const AMAZON_URL =
   "https://www.amazon.es/stores/Gala-Stone/author/B0H6TD32HX?ref=sr_ntt_srch_lnk_13&shoppingPortalEnabled=true";
 
-// Textos en castellà (pendents de passar a translations.js)
-const GUIA = [
-  { img: "guia-01.webp", text: "La imaginación siempre es más importante que la pantalla." },
-  { img: "guia-02.webp", text: "No existe una forma correcta de crear." },
-  { img: "guia-03.webp", text: "Un dibujo puede convertirse en una conversación." },
-  { img: "guia-04.webp", text: "Los mejores recuerdos nacen compartiendo tiempo." },
-];
-
-const PROCESO = [
-  { icon: "bulb", text: "Pensamos actividades que despierten la curiosidad." },
-  { icon: "pencil", text: "Diseñamos ilustraciones grandes, claras y fáciles de colorear." },
-  { icon: "heart", text: "Probamos cada libro pensando en niños de 3 a 5 años." },
-  { icon: "star", text: "Cuidamos cada detalle para ofrecer una colección coherente y de calidad." },
-];
+// Dades no traduïbles; els textos són a translations.js (t.aboutUs)
+const GUIA_IMG = ["guia-01.webp", "guia-02.webp", "guia-03.webp", "guia-04.webp"];
+const PROCESO_ICON = ["bulb", "pencil", "heart", "star"];
 
 const ICONS = {
   bulb: (
@@ -35,6 +34,32 @@ const ICONS = {
     <path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" />
   ),
 };
+
+// Paleta del claim de la home (TITULO.png): --about-claim-1..7 a AboutUs.css
+const CLAIM_COLORS = 7;
+
+// Pinta cada lletra (o cada paraula, amb byWord) amb un color cíclic de la paleta, com a la home.
+// Els spans són aria-hidden: l'element contenidor porta el text sencer (aria-label).
+const PUNCT = /[.,;:!?¿¡]/;
+const claimColor = (n) => `var(--about-claim-${(n % CLAIM_COLORS) + 1})`;
+
+function Claim({ text, byWord = false }) {
+  let n = 0;
+  return text.split(" ").map((word, w) => {
+    const wordColor = byWord ? claimColor(n++) : null;
+    return (
+      <Fragment key={w}>
+        {w > 0 && " "}
+        <span className="about-claim-word" aria-hidden="true">
+          {[...word].map((c, i) => {
+            const color = PUNCT.test(c) ? "var(--about-claim-7)" : wordColor || claimColor(n++);
+            return <span key={i} aria-hidden="true" style={{ color }}>{c}</span>;
+          })}
+        </span>
+      </Fragment>
+    );
+  });
+}
 
 function Icon({ name, className }) {
   return (
@@ -54,26 +79,25 @@ function Icon({ name, className }) {
 }
 
 export default function AboutUs({ ctaHref = AMAZON_URL }) {
+  const { t } = useLanguage();
+  const T = t.aboutUs;
+  const GUIA = T.guide.map((text, i) => ({ img: GUIA_IMG[i], text }));
+  const PROCESO = T.process.map((text, i) => ({ icon: PROCESO_ICON[i], text }));
   return (
     <div className="about">
+      <style>{FONT_FACE}</style>
       {/* HERO */}
       <section className="about-hero">
         <div className="about-hero__text">
-          <p className="about-eyebrow">Sobre nosotros</p>
-          <h1 className="about-hero__title">
-            Libros que <span className="about-accent">inspiran</span> infancia real.
+          <p className="about-eyebrow">{T.eyebrow}</p>
+          <h1 className="about-hero__title" aria-label={T.heroTitle}>
+            <Claim text={T.heroTitle} />
           </h1>
-          <p className="about-hero__lead">
-            En Gala Kids Books creemos que la infancia merece tiempo, creatividad y
-            momentos compartidos. Por eso creamos libros que acompañan a los niños a
-            imaginar, aprender y crecer jugando. Cada página nace con el propósito de
-            despertar la curiosidad, fortalecer la creatividad y crear recuerdos en
-            familia.
-          </p>
+          <p className="about-hero__lead">{T.heroLead}</p>
           <Icon name="heart" className="about-hero__heart" />
         </div>
         <div className="about-hero__media">
-          <img src={img("hero.webp")} alt="Niño coloreando un libro de Gala Kids" />
+          <img src={img("hero.webp")} alt={T.heroAlt} />
         </div>
       </section>
 
@@ -81,33 +105,22 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
       <section className="about-section">
         <div className="about-who">
           <div className="about-who__text">
-            <h2 className="about-h2">¿Quiénes somos?</h2>
-            <p>
-              Somos un pequeño equipo de soñadores, diseñadores, ilustradores y
-              familias que comparte una misma idea: la infancia merece experiencias
-              sencillas, creativas y de calidad.
-            </p>
-            <p>
-              No hacemos libros para llenar el tiempo. Creamos herramientas para que
-              padres e hijos puedan compartir momentos reales, conversar, imaginar y
-              descubrir juntos.
-            </p>
-            <p>
-              Cada ilustración se diseña pensando en las pequeñas manos que la
-              colorearán y en las historias que nacerán alrededor de ella.
-            </p>
+            <h2 className="about-h2" aria-label={T.whoTitle}><Claim text={T.whoTitle} /></h2>
+            {T.who.map((text, i) => (
+              <p key={i}>{text}</p>
+            ))}
             <span className="about-who__line" />
           </div>
           <div className="about-who__media">
-            <img src={img("quienes-somos.webp")} alt="Equipo de Gala Kids dibujando juntos" loading="lazy" />
+            <img src={img("quienes-somos.webp")} alt={T.whoAlt} loading="lazy" />
           </div>
         </div>
       </section>
 
       {/* LO QUE NOS GUÍA CADA DÍA */}
       <section className="about-section">
-        <h2 className="about-h2 about-h2--center">
-          Lo que nos <span className="about-script">guía</span> cada día
+        <h2 className="about-h2 about-h2--center" aria-label={T.guideTitle}>
+          <Claim text={T.guideTitle} />
         </h2>
         <div className="about-guide">
           {GUIA.map((g) => (
@@ -117,12 +130,14 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
             </article>
           ))}
         </div>
-        <p className="about-guide__extra">Cada niño aprende a su ritmo.</p>
+        <p className="about-guide__extra">{T.guideExtra}</p>
       </section>
 
       {/* NUESTRO PROCESO */}
       <section className="about-section">
-        <h2 className="about-h2 about-h2--center about-h2--rays">Nuestro proceso</h2>
+        <h2 className="about-h2 about-h2--center about-h2--rays" aria-label={T.processTitle}>
+          <Claim text={T.processTitle} />
+        </h2>
         <ol className="about-process">
           {PROCESO.map((p, i) => (
             <li className="about-process__step" key={p.icon}>
@@ -137,15 +152,10 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
       {/* NUESTRA PROMESA */}
       <section className="about-section">
         <div className="about-promise">
-          <h2 className="about-h2">
-            Nuestra <span className="about-script about-script--rainbow">promesa</span>
+          <h2 className="about-h2" aria-label={T.promiseTitle}>
+            <Claim text={T.promiseTitle} />
           </h2>
-          <p>
-            Queremos que cada libro Gala Kids sea una invitación a apagar las pantallas
-            durante un rato y abrir la puerta a la imaginación. Si un dibujo consigue
-            convertirse en una historia, una conversación o un recuerdo familiar,
-            entonces habrá cumplido su propósito.
-          </p>
+          <p>{T.promise}</p>
         </div>
       </section>
 
@@ -154,10 +164,12 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
         <div className="about-close">
           <Icon name="star" className="about-close__deco about-close__deco--star" />
           <Icon name="heart" className="about-close__deco about-close__deco--heart" />
-          <h2 className="about-close__title">Menos pantallas. Más imaginación.</h2>
-          <p>Libros para imaginar, crear y crecer en familia.</p>
+          <h2 className="about-close__title" aria-label={T.closeTitle}>
+            <Claim text={T.closeTitle} byWord />
+          </h2>
+          <p>{T.closeText}</p>
           <a className="about-close__btn" href={ctaHref} target="_blank" rel="noopener noreferrer">
-            Descubrir colección →
+            {T.cta} →
           </a>
         </div>
       </section>

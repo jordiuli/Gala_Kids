@@ -3,6 +3,16 @@
   --filo-orange: #c8642c;
   --filo-red: #c94a3a;
   --filo-serif: "Libre Baskerville", Georgia, serif;
+  /* Claims principals amb SilverKids (@font-face injectat a Filosofia.jsx) */
+  --filo-claim: "SilverKids", var(--filo-serif);
+  /* Paleta del claim de la home (extreta de TITULO.png) */
+  --filo-claim-1: #ee6856; /* coral */
+  --filo-claim-2: #edb02a; /* groc */
+  --filo-claim-3: #51a553; /* verd */
+  --filo-claim-4: #1058a0; /* blau */
+  --filo-claim-5: #9870a8; /* lila */
+  --filo-claim-6: #5890c0; /* blau clar */
+  --filo-claim-7: #1d3868; /* navy (també puntuació) */
   background: var(--bg-cream);
   color: var(--navy);
 }
@@ -12,33 +22,64 @@
 .filo-orange { color: var(--filo-orange); }
 .filo-red { color: var(--filo-red); }
 
+.filo-claim {
+  font-family: var(--filo-claim);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.filo-claim-word {
+  white-space: nowrap;
+}
+
+.filo-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* ---------- Hero ---------- */
+/* La imatge (inline a la secció) es pinta a ::after, sencera (contain), ocupant
+   la dreta (~65%) com a l'esbós; el text queda a l'esquerra sobre crema. */
 .filo-hero {
+  --filo-img-w: min(65%, calc(100% - 500px));
   position: relative;
-  min-height: 620px;
-  background-size: cover;
-  background-position: right center;
+  min-height: max(620px, calc(min(65vw, 100vw - 500px) / 1.5));
+  background-color: var(--bg-cream);
+  background-size: 0 0; /* només es mostra via ::after */
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
 }
 
-.filo-hero::before {
+.filo-hero::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    var(--bg-cream) 0%,
-    rgba(250, 244, 236, 0.95) 30%,
-    rgba(250, 244, 236, 0.6) 45%,
-    rgba(250, 244, 236, 0) 60%
-  );
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--filo-img-w);
+  background-image: inherit;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  /* fos suau a l'esquerra i a dalt (no a baix: els llibres arriben al límit) */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%),
+    linear-gradient(180deg, transparent 0, #000 12%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0, #000 14%),
+    linear-gradient(180deg, transparent 0, #000 12%);
+  mask-composite: intersect;
 }
 
 .filo-hero-content {
   position: relative;
+  z-index: 1;
   max-width: 440px;
-  margin-left: 6%;
+  margin-left: clamp(24px, 3vw, 64px);
   padding: 64px 0;
   font-size: 0.95rem;
 }
@@ -57,14 +98,9 @@
 }
 
 .filo-title {
-  font-family: var(--filo-serif);
   font-weight: 400;
   font-size: clamp(2.6rem, 5vw, 4rem);
   line-height: 1.1;
-}
-
-.filo-title .filo-navy {
-  display: block;
 }
 
 .filo-rule {
@@ -91,10 +127,8 @@
 .filo-section-title {
   text-align: center;
   color: var(--filo-olive);
-  font-size: 1.2rem;
+  font-size: 1.44rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   margin-bottom: 40px;
 }
 
@@ -153,11 +187,10 @@
 }
 
 .filo-quote {
-  font-family: var(--filo-serif);
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-size: clamp(1.2rem, 1.92vw, 1.44rem);
   text-align: center;
-  line-height: 1.6;
-  max-width: 640px;
+  line-height: 1.5;
+  max-width: 760px;
   margin: 0 auto 40px;
 }
 
@@ -201,30 +234,28 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1024px) {
+  /* Apilat: imatge sencera a dalt, text a sota */
   .filo-hero {
     min-height: 0;
     flex-direction: column;
     align-items: stretch;
-    background-size: 100% auto;
-    background-position: top center;
-    background-repeat: no-repeat;
-    padding-top: 60vw;
+    padding-top: 66.667%;
   }
 
-  .filo-hero::before {
-    background: linear-gradient(
-      180deg,
-      rgba(250, 244, 236, 0) 0%,
-      rgba(250, 244, 236, 0) 50vw,
-      var(--bg-cream) 66vw
-    );
+  .filo-hero::after {
+    bottom: auto;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    background-position: center top;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .filo-hero-content {
-    margin: 0;
-    padding: 0 16px 48px;
-    max-width: none;
+    margin: 0 auto;
+    padding: 32px 16px 48px;
+    max-width: 640px;
   }
 }
 
