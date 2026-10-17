@@ -135,8 +135,9 @@
 .ct-hero__content {
   position: relative;
   z-index: 1;
-  width: min(440px, 42%);
-  margin-left: max(4vw, calc((100vw - var(--ct-max)) / 2));
+  /* Ample i marge lligats al viewport perquè el text no arribi als llapis de la imatge */
+  width: min(440px, calc(30vw - 40px));
+  margin-left: clamp(24px, 3vw, 64px);
   padding: 60px 0;
 }
 
@@ -155,7 +156,7 @@
 }
 
 .ct-hero__title {
-  font-size: clamp(3rem, 6vw, 4.6rem);
+  font-size: clamp(2.4rem, 4.4vw, 4.6rem);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: 0.02em;
@@ -463,7 +464,9 @@
 }
 
 /* ----- Responsive ----- */
-@media (max-width: 900px) {
+/* Hero apilat abans que la resta: entre 900 i 1080px el crop de la imatge
+   deixava els llapis massa a l'esquerra i el text els trepitjava */
+@media (max-width: 1080px) {
   .ct-hero {
     flex-direction: column;
     align-items: stretch;
@@ -483,7 +486,9 @@
     margin: 0;
     padding: 24px 16px 40px;
   }
+}
 
+@media (max-width: 900px) {
   .ct-form-wrap {
     grid-template-columns: 1fr;
     gap: 32px;
