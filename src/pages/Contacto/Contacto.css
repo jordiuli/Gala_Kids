@@ -58,6 +58,15 @@
   white-space: nowrap;
 }
 
+.ct-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* ----- Botons ----- */
 .ct-btn {
   display: inline-flex;
@@ -192,7 +201,7 @@
 }
 
 .ct-form__title {
-  font-size: 1.7rem;
+  font-size: 2.04rem; /* 1.7rem × 1.2 */
   line-height: 1.2;
   margin-bottom: 18px;
 }
@@ -274,7 +283,8 @@
 
 .ct-section-title {
   text-align: center;
-  font-size: 1.7rem;
+  font-size: 2.04rem; /* 1.7rem × 1.2 */
+  line-height: 1.25;
   margin-bottom: 32px;
 }
 
@@ -428,7 +438,7 @@
 }
 
 .ct-closing p {
-  font-size: clamp(1.2rem, 2.3vw, 1.6rem);
+  font-size: clamp(1.44rem, 2.76vw, 1.92rem); /* ×1.2 */
   line-height: 1.4;
   max-width: 640px;
   margin: 0 auto;

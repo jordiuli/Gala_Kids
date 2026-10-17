@@ -83,21 +83,28 @@ const T = {
 // Paleta del claim de la home (TITULO.png): --ct-claim-1..7 a Contacto.css
 const CLAIM_COLORS = 7;
 
-// Pinta cada lletra amb un color cíclic de la paleta, com a la home.
+// Pinta cada lletra (o cada paraula, amb byWord) amb un color cíclic de la paleta, com a la home.
 // Cada paraula va en un <span> perquè no es trenqui a mitja paraula; la puntuació va en navy.
-function Claim({ text, offset = 0 }) {
+// Els spans són aria-hidden: l'element contenidor porta el text sencer (aria-label o .ct-sr).
+const PUNCT = /[.,;:!?¿¡]/;
+const claimColor = (n) => `var(--ct-claim-${(n % CLAIM_COLORS) + 1})`;
+
+function Claim({ text, offset = 0, byWord = false }) {
   let n = offset;
-  return text.split(" ").map((word, w) => (
-    <Fragment key={w}>
-      {w > 0 && " "}
-      <span className="ct-claim-word">
-        {[...word].map((c, i) => {
-          const color = /[.,;:!?¿¡]/.test(c) ? "var(--ct-claim-7)" : `var(--ct-claim-${(n++ % CLAIM_COLORS) + 1})`;
-          return <span key={i} style={{ color }}>{c}</span>;
-        })}
-      </span>
-    </Fragment>
-  ));
+  return text.split(" ").map((word, w) => {
+    const wordColor = byWord ? claimColor(n++) : null;
+    return (
+      <Fragment key={w}>
+        {w > 0 && " "}
+        <span className="ct-claim-word" aria-hidden="true">
+          {[...word].map((c, i) => {
+            const color = PUNCT.test(c) ? "var(--ct-claim-7)" : wordColor || claimColor(n++);
+            return <span key={i} aria-hidden="true" style={{ color }}>{c}</span>;
+          })}
+        </span>
+      </Fragment>
+    );
+  });
 }
 
 const ICONS = {
@@ -156,7 +163,7 @@ export default function Contacto() {
         <div className="ct-hero__content">
           <span className="ct-deco ct-deco--star">★</span>
           <p className="ct-hero__label">{T.label}</p>
-          <h1 className="ct-hero__title">
+          <h1 className="ct-hero__title" aria-label={`${T.title}.`}>
             <Claim text={`${T.title}.`} />
           </h1>
           <p className="ct-hero__subtitle">{T.subtitle}</p>
@@ -171,10 +178,10 @@ export default function Contacto() {
       {/* FORMULARI */}
       <section className="ct-form-wrap" id="ct-form">
         <form className="ct-form" onSubmit={onSubmit}>
-          <h2 className="ct-form__title">
+          <h2 className="ct-form__title" aria-label={`${T.formTitleA} ${T.formTitleB}`}>
             <Claim text={T.formTitleA} />
             <br />
-            <Claim text={T.formTitleB} offset={T.formTitleA.length} /> <span className="ct-heart">♡</span>
+            <Claim text={T.formTitleB} offset={T.formTitleA.length} /> <span className="ct-heart" aria-hidden="true">♡</span>
           </h2>
 
           {FIELDS.map((f) => (
@@ -205,7 +212,7 @@ export default function Contacto() {
 
       {/* ALTRES FORMES */}
       <section className="ct-other">
-        <h2 className="ct-serif ct-section-title"><Claim text={T.otherTitle} /></h2>
+        <h2 className="ct-serif ct-section-title" aria-label={T.otherTitle}><Claim text={T.otherTitle} /></h2>
         <div className="ct-cards">
           {T.cards.map((c) => (
             <article key={c.key} className="ct-card">
@@ -227,7 +234,7 @@ export default function Contacto() {
 
       {/* FAQ */}
       <section className="ct-faq">
-        <h2 className="ct-serif ct-section-title ct-underline"><Claim text={T.faqTitle} /></h2>
+        <h2 className="ct-serif ct-section-title ct-underline" aria-label={T.faqTitle}><Claim text={T.faqTitle} /></h2>
         <div className="ct-faq__grid">
           {T.faqs.map((f, i) => (
             <div key={i} className={`ct-faq__item ${open[i] ? "is-open" : ""}`}>
@@ -249,7 +256,10 @@ export default function Contacto() {
       {/* TANCAMENT */}
       <section className="ct-closing">
         <span className="ct-deco ct-deco--heart">♡</span>
-        <p className="ct-serif ct-underline"><Claim text={T.closing} /></p>
+        <p className="ct-serif ct-underline">
+          <span className="ct-sr">{T.closing}</span>
+          <Claim text={T.closing} byWord />
+        </p>
       </section>
 
       <img className="ct-bottom" src={pic("inferior.webp")} alt="" loading="lazy" />
