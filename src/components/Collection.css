@@ -37,15 +37,78 @@
   color: var(--white);
 }
 
-.collection-img-wrapper {
+/* Carrusel de llibres (scroll lateral) */
+.collection-carousel {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.collection-img {
-  width: 80%;
+.collection-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 12px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.collection-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  scroll-snap-align: start;
+}
+
+.collection-card img {
+  width: 100%;
   height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
   display: block;
-  margin: 0 auto;
   border-radius: 12px;
+}
+
+.collection-arrow {
+  position: absolute;
+  top: calc(50% - 6px);
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--white);
+  color: var(--navy);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: background 0.15s, color 0.15s;
+}
+
+.collection-arrow:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.collection-arrow--prev { left: -22px; }
+.collection-arrow--next { right: -22px; }
+
+@media (max-width: 900px) {
+  .collection-card {
+    flex-basis: calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  .collection-card {
+    flex-basis: 85%;
+  }
+
+  .collection-arrow {
+    display: none;
+  }
 }
