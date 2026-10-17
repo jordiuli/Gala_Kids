@@ -4,7 +4,7 @@ const img = (file) => `${base}img/${encodeURIComponent(file)}`;
 export const IMG = {
   logoHorizontal:  img("LOGO HORIZONTAL.png"),
   logoVertical:    img("LOGO VERTICAL.png"),
-  cabecera:        img("CABECERA.png"),
+  cabecera:        img("cabecera.webp"),  // img/main/CABECERA.png voltejada
   titulo:          img("TITULO.png"),
   coleccion:       img("COLECCION.png"),
   miColeccion:     img("MI COLECCION OK.png"),
