@@ -1,6 +1,8 @@
 /* ===== Pàgina Contacto ===== */
 .contacto {
   --ct-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  /* Claims principals amb SilverKids (@font-face injectat a Contacto.jsx) */
+  --ct-claim: "SilverKids", var(--ct-serif);
   --ct-max: 1200px;
   background: var(--white);
   overflow-x: hidden;
@@ -32,6 +34,14 @@
   position: absolute;
   pointer-events: none;
   line-height: 1;
+}
+
+/* Claims principals */
+.ct-hero__title,
+.ct-form__title,
+.ct-section-title,
+.ct-closing p {
+  font-family: var(--ct-claim);
 }
 
 /* ----- Botons ----- */
@@ -172,7 +182,6 @@
 }
 
 .ct-form__title {
-  font-family: var(--ct-serif);
   font-size: 1.7rem;
   line-height: 1.2;
   margin-bottom: 18px;

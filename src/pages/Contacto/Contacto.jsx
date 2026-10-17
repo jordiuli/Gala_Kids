@@ -5,6 +5,14 @@ import "./Contacto.css";
 const base = import.meta.env.BASE_URL;
 const pic = (file) => `${base}img/contacto/${file}`;
 
+// Prova SilverKids: s'injecta aquí perquè la ruta respecti BASE_URL ("/Gala_Kids/").
+// Fitxer: public/fonts/Silverkids.otf (respectar majúscules: GitHub Pages hi distingeix)
+const FONT_FACE = `@font-face {
+  font-family: "SilverKids";
+  src: url("${base}fonts/Silverkids.otf") format("opentype");
+  font-display: swap;
+}`;
+
 const AMAZON_URL =
   "https://www.amazon.es/stores/Gala-Stone/author/B0H6TD32HX?ref=sr_ntt_srch_lnk_13&shoppingPortalEnabled=true";
 const PINTEREST_URL = "https://es.pinterest.com/galakids/";
@@ -123,6 +131,7 @@ export default function Contacto() {
 
   return (
     <div className="contacto">
+      <style>{FONT_FACE}</style>
       {/* HERO */}
       <section className="ct-hero">
         <img className="ct-hero__img" src={pic("hero.webp")} alt="" />
