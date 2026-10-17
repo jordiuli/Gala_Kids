@@ -9,6 +9,8 @@ const BOOKS = [
   { file: "dinosaurios.webp", title: "Dinosaurios adorables" },
   { file: "monster-trucks.webp", title: "Monster Trucks" },
   { file: "unicornios.webp", title: "Unicornios adorables" },
+  { file: "actividades-en.webp", title: "Halloween in Action – Activity Book" },
+  { file: "halloween-en.webp", title: "Halloween in Action – Coloring Book" },
 ];
 
 const bookSrc = (file) => `${import.meta.env.BASE_URL}img/coleccion/${file}`;
