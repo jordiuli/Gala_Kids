@@ -126,6 +126,7 @@
 
 /* ---------- Lo que defendemos ---------- */
 .filo-values {
+  background: var(--white);
   padding: 56px 6% 64px;
 }
 

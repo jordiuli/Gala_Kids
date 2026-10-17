@@ -21,26 +21,6 @@ const GUIA_IMG = ["guia-01.webp", "guia-02.webp", "guia-03.webp", "guia-04.webp"
 const MISION_ICON = ["bulb", "book", "heart"];
 const VALORES_ICON = ["palette", "hand", "heart", "star"];
 
-// TEMPORAL: textos nous (transcrits de l'esbós) pendents que el traductor els passi a t.aboutUs
-const NEW_TEXT = {
-  missionTitle: "Nuestra misión",
-  mission:
-    "Fomentar la imaginación, el aprendizaje y los valores a través de libros diseñados para los más pequeños, con ilustraciones entrañables y actividades que despiertan su curiosidad natural.",
-  missionAlt: "Vaca, pollito y cerdito de Gala Kids",
-  missionItems: [
-    { title: "Imaginación sin límites", text: "Historias y actividades que abren la puerta a mundos llenos de posibilidades." },
-    { title: "Aprendizaje significativo", text: "Contenidos pensados para estimular habilidades clave de forma divertida." },
-    { title: "Momentos que conectan", text: "Libros que invitan a compartir, conversar y crear recuerdos en familia." },
-  ],
-  valuesTitle: "Nuestros valores",
-  values: [
-    { title: "Creatividad", text: "Diseñamos experiencias que estimulan la expresión, la imaginación y el juego libre." },
-    { title: "Calidad", text: "Cuidamos cada detalle: ilustraciones, contenidos y materiales pensados para durar y acompañar." },
-    { title: "Familia", text: "Creemos en el poder del tiempo compartido y en los lazos que se fortalecen leyendo juntos." },
-    { title: "Confianza", text: "Acompañamos a los padres con contenidos seguros, adaptados y pensados para cada etapa." },
-  ],
-};
-
 const ICONS = {
   bulb: (
     <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z" />
@@ -96,6 +76,41 @@ function Claim({ text, byWord = false }) {
   });
 }
 
+// Claim de tancament amb la jerarquia de TITULO.png: per cada frase, la primera paraula
+// petita en navy i inclinada; la resta gran, lletra a lletra en color amb lleus girs i salts.
+const TILT = [-5, 4, -3, 6, -4, 3, -6, 2, 5, -2];
+const LIFT = [0, -0.06, 0.04, -0.03, 0.05, -0.05, 0.02, -0.04];
+
+function StackedClaim({ text }) {
+  let n = 0;
+  return text.split(/(?<=[.!?])\s+/).map((sentence, s) => {
+    const [first, ...rest] = sentence.split(" ");
+    return (
+      <span className={`about-stack__line about-stack__line--${s % 2 ? "even" : "odd"}`} key={s} aria-hidden="true">
+        <span className="about-stack__small">{first}</span>
+        <span className="about-stack__big">
+          {rest.join(" ").split(" ").map((word, w) => (
+            <Fragment key={w}>
+              {w > 0 && " "}
+              <span className="about-claim-word">
+                {[...word].map((c, i) => {
+                  const k = n++;
+                  const punct = PUNCT.test(c);
+                  const style = {
+                    color: punct ? "var(--about-claim-7)" : claimColor(k),
+                    transform: punct ? undefined : `translateY(${LIFT[k % LIFT.length]}em) rotate(${TILT[k % TILT.length]}deg)`,
+                  };
+                  return <span key={i} style={style}>{c}</span>;
+                })}
+              </span>
+            </Fragment>
+          ))}
+        </span>
+      </span>
+    );
+  });
+}
+
 function Icon({ name, className }) {
   return (
     <svg
@@ -140,18 +155,18 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
         <img
           className="about-mission__animals"
           src={img("vaca.webp")}
-          alt={NEW_TEXT.missionAlt}
+          alt={T.missionAlt}
           loading="lazy"
         />
         <img className="about-mission__pig" src={img("cerdito.webp")} alt="" loading="lazy" />
         <div className="about-mission__text">
-          <h2 className="about-h2 about-h2--rays" aria-label={NEW_TEXT.missionTitle}>
-            <Claim text={NEW_TEXT.missionTitle} />
+          <h2 className="about-h2 about-h2--rays" aria-label={T.missionTitle}>
+            <Claim text={T.missionTitle} />
           </h2>
-          <p>{NEW_TEXT.mission}</p>
+          <p>{T.mission}</p>
         </div>
         <ul className="about-mission__card">
-          {NEW_TEXT.missionItems.map((m, i) => (
+          {T.missionItems.map((m, i) => (
             <li key={m.title}>
               <Icon name={MISION_ICON[i]} className={`about-mission__icon about-mission__icon--${i + 1}`} />
               <div>
@@ -165,11 +180,11 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
 
       {/* NUESTROS VALORES */}
       <section className="about-section">
-        <h2 className="about-h2 about-h2--center about-h2--rays" aria-label={NEW_TEXT.valuesTitle}>
-          <Claim text={NEW_TEXT.valuesTitle} />
+        <h2 className="about-h2 about-h2--center about-h2--rays" aria-label={T.valuesTitle}>
+          <Claim text={T.valuesTitle} />
         </h2>
         <ul className="about-values">
-          {NEW_TEXT.values.map((v, i) => (
+          {T.values.map((v, i) => (
             <li className="about-values__item" key={v.title}>
               <Icon name={VALORES_ICON[i]} className={`about-values__icon about-values__icon--${i + 1}`} />
               <h3>{v.title}</h3>
@@ -218,8 +233,8 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
           <Icon name="heart" className="about-close__deco about-close__deco--heart" />
           <img className="about-close__dino" src={img("dinosaurio.webp")} alt="" loading="lazy" />
           <img className="about-close__cow" src={img("vaca.webp")} alt="" loading="lazy" />
-          <h2 className="about-close__title" aria-label={T.closeTitle}>
-            <Claim text={T.closeTitle} byWord />
+          <h2 className="about-close__title about-stack" aria-label={T.closeTitle}>
+            <StackedClaim text={T.closeTitle} />
           </h2>
           <p>{T.closeText}</p>
           <a className="about-close__btn" href={ctaHref} target="_blank" rel="noopener noreferrer">

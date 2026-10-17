@@ -183,7 +183,8 @@
   margin-top: 36px;
   text-align: center;
   font-family: "Dancing Script", cursive;
-  font-size: 1.7rem;
+  font-size: 3.4rem; /* doble que abans (1.7rem) */
+  line-height: 1.2;
   color: var(--orange);
 }
 
@@ -304,9 +305,51 @@
 
 .about-close__title {
   font-weight: 400;
-  font-size: clamp(1.92rem, 3.6vw, 2.64rem);
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
   color: var(--navy);
   margin-bottom: 8px;
+}
+
+/* Jerarquia de TITULO.png: paraula petita navy inclinada a sobre, paraula gran en color a sota;
+   la primera frase desplaçada a la dreta i la segona a l'esquerra */
+.about-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.about-stack__line {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.about-stack__line--odd {
+  margin-left: 1.4em;
+}
+
+.about-stack__line--even {
+  margin-top: 0.05em;
+}
+
+.about-stack__small {
+  font-size: 0.42em;
+  color: #111;
+  transform: rotate(-4deg);
+  margin: 0 0 -0.12em 0.15em;
+}
+
+.about-stack__line--even .about-stack__small {
+  transform: rotate(-7deg);
+  margin-left: -0.2em;
+}
+
+.about-stack__big .about-claim-word span {
+  display: inline-block;
 }
 
 .about-close p {
@@ -449,5 +492,15 @@
 
   .about-close__deco {
     display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .about-close__title {
+    font-size: clamp(2rem, 10vw, 2.6rem);
+  }
+
+  .about-stack__line--odd {
+    margin-left: 0.6em;
   }
 }
