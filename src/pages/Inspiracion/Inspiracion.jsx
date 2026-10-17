@@ -1,64 +1,21 @@
+import { Fragment } from "react";
 import "./Inspiracion.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const img = (name) => `${import.meta.env.BASE_URL}img/inspiracion/${name}`;
 
-// Textos en castellà (pendent de moure a translations.js pel traductor)
-const TEXT = {
-  hero: {
-    eyebrow: "Inspiración",
-    // Cada línia del títol es pinta amb paraules de colors alterns
-    title: ["Las mejores tardes", "nunca empiezan", "con una pantalla."],
-    lines: [
-      "No necesitas grandes planes.",
-      "Solo tiempo.",
-      "Un lápiz.",
-      "Un papel.",
-      "Y alguien con quien imaginar.",
-    ],
-    cta: "Descubrir ideas",
-    imageAlt: "Niña construyendo un castillo de cartón en casa",
-  },
-  ideas: {
-    title: "Ideas para esta tarde",
-    prep: "5 min de preparación",
-    items: [
-      { icon: "castle", image: "idea-castillo.webp", title: "Construye un castillo", text: "Convierte una caja de cartón en un castillo lleno de historias." },
-      { icon: "book", image: "idea-cuento.webp", title: "Inventa un cuento", text: "Empieza con un dibujo y deja que la imaginación haga el resto." },
-      { icon: "binoculars", image: "idea-safari.webp", title: "Haz un safari en casa", text: "Explora cada rincón como si fuera una expedición." },
-      { icon: "leaf", image: "idea-herbario.webp", title: "Crea un herbario", text: "Colecciona pequeños tesoros de la naturaleza." },
-      { icon: "map", image: "idea-mapa.webp", title: "Diseña un mapa del tesoro", text: "Esconde pistas y vive una aventura." },
-      { icon: "cup", image: "idea-cafe.webp", title: "Abre un café de cartón", text: "Una tarde puede convertirse en un pequeño negocio imaginario." },
-    ],
-  },
-  featured: {
-    title: ["¿Y si este dinosaurio", "viviera en tu jardín?"],
-    text: "Las mejores historias empiezan con una pregunta.",
-  },
-  families: {
-    title: "Inspiración para familias",
-    items: [
-      { image: "familia-sabado.webp", title: "Un sábado sin prisas", text: "Los mejores recuerdos nacen cuando nadie tiene prisa." },
-      { image: "familia-caja.webp", title: "Una caja puede ser un castillo", text: "La imaginación transforma lo cotidiano en extraordinario." },
-      { image: "familia-recuerdos.webp", title: "Los mejores recuerdos no llevan batería", text: "Los momentos compartidos siempre duran más." },
-    ],
-  },
-  quotes: {
-    title: "Frases que creemos",
-    items: [
-      { icon: "heart", text: "No hace falta entretener. Hace falta compartir." },
-      { icon: "pencil", text: "Cada dibujo es una conversación." },
-      { icon: "people", text: "Los niños no recuerdan el juguete. Recuerdan quién estaba allí." },
-      { icon: "star", text: "La imaginación necesita tiempo." },
-    ],
-  },
-  download: {
-    title: ["Descarga una idea", "para esta tarde"],
-    text: "Actividades sencillas para llenar cualquier tarde de imaginación.",
-    cta: "Descargar actividad",
-    href: "#", // pendent: URL del PDF descarregable
-    imageAlt: "Niña coloreando un unicornio junto a un libro Gala Kids",
-  },
-};
+// Dades no traduïbles; els textos són a translations.js (t.inspiracion)
+const IDEA_MEDIA = [
+  { icon: "castle", image: "idea-castillo.webp" },
+  { icon: "book", image: "idea-cuento.webp" },
+  { icon: "binoculars", image: "idea-safari.webp" },
+  { icon: "leaf", image: "idea-herbario.webp" },
+  { icon: "map", image: "idea-mapa.webp" },
+  { icon: "cup", image: "idea-cafe.webp" },
+];
+const FAMILY_IMG = ["familia-sabado.webp", "familia-caja.webp", "familia-recuerdos.webp"];
+const QUOTE_ICON = ["heart", "pencil", "people", "star"];
+const DOWNLOAD_HREF = "#"; // pendent: URL del PDF descarregable
 
 // Imatge del bloc destacat (dinosaure): encara no disponible -> null
 const FEATURED_IMAGE = null;
@@ -102,18 +59,45 @@ function Cloud({ className = "" }) {
   );
 }
 
-// Pinta cada paraula d'un color alternant, per imitar el títol multicolor de l'esbós
-function ColorTitle({ lines, as: Tag = "h1", className = "" }) {
-  let i = 0;
+// Font dels claims (SilverKids): s'injecta aquí perquè la ruta respecti BASE_URL
+const FONT_FACE = `@font-face {
+  font-family: "SilverKids";
+  src: url("${import.meta.env.BASE_URL}fonts/Silverkids.otf") format("opentype");
+  font-display: swap;
+}`;
+
+// Paleta del claim de la home (TITULO.png): --insp-claim-1..7 a Inspiracion.css
+const CLAIM_COLORS = 7;
+const PUNCT = /[.,;:!?¿¡'"«»()\-–—…]/;
+const claimColor = (n) => `var(--insp-claim-${(n % CLAIM_COLORS) + 1})`;
+
+// Un color cíclic per lletra (o per paraula amb byWord); la puntuació sempre en navy.
+// Cada paraula va en un span nowrap perquè no es trenqui a mitja paraula.
+function ClaimWords({ text, counter, byWord }) {
+  return text.split(" ").map((word, w) => {
+    const wordColor = byWord ? claimColor(counter.n++) : null;
+    return (
+      <Fragment key={w}>
+        {w > 0 && " "}
+        <span className="insp-claim-word" aria-hidden="true">
+          {[...word].map((c, i) => {
+            const color = PUNCT.test(c) ? "var(--insp-claim-7)" : wordColor || claimColor(counter.n++);
+            return <span key={i} aria-hidden="true" style={{ color }}>{c}</span>;
+          })}
+        </span>
+      </Fragment>
+    );
+  });
+}
+
+// Claim multilínia (hero, destacat, tancament)
+function ColorTitle({ lines, as: Tag = "h1", className = "", byWord = false }) {
+  const counter = { n: 0 };
   return (
-    <Tag className={`insp-color-title ${className}`}>
+    <Tag className={`insp-claim insp-color-title ${className}`} aria-label={lines.join(" ")}>
       {lines.map((line, li) => (
-        <span className="insp-color-title__line" key={li}>
-          {line.split(" ").map((word, wi) => (
-            <span key={wi} className={`insp-c-${COLORS[i++ % COLORS.length]}`}>
-              {word}{" "}
-            </span>
-          ))}
+        <span className="insp-color-title__line" key={li} aria-hidden="true">
+          <ClaimWords text={line} counter={counter} byWord={byWord} />
         </span>
       ))}
     </Tag>
@@ -122,18 +106,27 @@ function ColorTitle({ lines, as: Tag = "h1", className = "" }) {
 
 function SectionTitle({ children, center = false }) {
   return (
-    <h2 className={`insp-section-title${center ? " insp-section-title--center" : ""}`}>
+    <h2 className={`insp-section-title${center ? " insp-section-title--center" : ""}`} aria-label={children}>
       <Star />
-      {children}
+      <span className="insp-claim">
+        <ClaimWords text={children} counter={{ n: 0 }} />
+      </span>
     </h2>
   );
 }
 
 export default function Inspiracion() {
-  const { hero, ideas, featured, families, quotes, download } = TEXT;
+  const { t } = useLanguage();
+  const TEXT = t.inspiracion;
+  const { hero, featured } = TEXT;
+  const ideas = { ...TEXT.ideas, items: TEXT.ideas.items.map((it, i) => ({ ...it, ...IDEA_MEDIA[i] })) };
+  const families = { ...TEXT.families, items: TEXT.families.items.map((it, i) => ({ ...it, image: FAMILY_IMG[i] })) };
+  const quotes = { ...TEXT.quotes, items: TEXT.quotes.items.map((text, i) => ({ icon: QUOTE_ICON[i], text })) };
+  const download = { ...TEXT.download, href: DOWNLOAD_HREF };
 
   return (
     <main className="insp">
+      <style>{FONT_FACE}</style>
       {/* 1. HERO */}
       <section className="insp-hero">
         <div className="insp-hero__content">
@@ -229,7 +222,7 @@ export default function Inspiracion() {
       <section className="insp-container">
         <div className="insp-download">
           <div className="insp-download__content">
-            <ColorTitle lines={download.title} as="h2" className="insp-download__title" />
+            <ColorTitle lines={download.title} as="h2" className="insp-download__title" byWord />
             <p>{download.text}</p>
             <a href={download.href} className="insp-btn insp-btn--navy">
               {download.cta} <span aria-hidden="true">↓</span>

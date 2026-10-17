@@ -1,5 +1,15 @@
 .about {
   --about-serif: Georgia, "Times New Roman", serif;
+  /* Claims principals amb SilverKids (@font-face injectat a AboutUs.jsx) */
+  --about-claim: "SilverKids", var(--about-serif);
+  /* Paleta del claim de la home (extreta de TITULO.png) */
+  --about-claim-1: #ee6856; /* coral */
+  --about-claim-2: #edb02a; /* groc */
+  --about-claim-3: #51a553; /* verd */
+  --about-claim-4: #1058a0; /* blau */
+  --about-claim-5: #9870a8; /* lila */
+  --about-claim-6: #5890c0; /* blau clar */
+  --about-claim-7: #1d3868; /* navy (també puntuació) */
   --about-max: 1180px;
   background: var(--bg);
   overflow-x: hidden;
@@ -20,27 +30,21 @@
   margin-bottom: 16px;
 }
 
-.about-accent {
-  color: var(--orange);
+.about-hero__title,
+.about-h2,
+.about-close__title {
+  font-family: var(--about-claim);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
-.about-script {
-  font-family: "Dancing Script", cursive;
-  color: var(--orange);
-  font-size: 1.15em;
-}
-
-.about-script--rainbow {
-  background: linear-gradient(90deg, var(--red), var(--orange), var(--yellow), var(--green), var(--blue));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.about-claim-word {
+  white-space: nowrap;
 }
 
 .about-h2 {
-  font-family: var(--about-serif);
   font-weight: 400;
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-size: clamp(2.16rem, 3.6vw, 2.88rem);
   color: var(--navy);
   line-height: 1.2;
   margin-bottom: 20px;
@@ -75,11 +79,11 @@
 .about-hero__text {
   position: relative;
   z-index: 1;
-  padding: 56px 24px 56px max(24px, calc((100vw - var(--about-max)) / 2 + 24px));
+  padding: 56px 24px;
+  margin-left: clamp(0px, 3vw - 24px, 40px);
 }
 
 .about-hero__title {
-  font-family: var(--about-serif);
   font-weight: 400;
   font-size: clamp(2.4rem, 4.6vw, 3.6rem);
   line-height: 1.12;
@@ -246,9 +250,8 @@
 }
 
 .about-close__title {
-  font-family: var(--about-serif);
   font-weight: 400;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.92rem, 3.6vw, 2.64rem);
   color: var(--navy);
   margin-bottom: 8px;
 }

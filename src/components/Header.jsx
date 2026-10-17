@@ -16,21 +16,32 @@ const LANGS = [
 export default function Header() {
   const { lang, setLang, t } = useLanguage();
   const [activeNav, setActiveNav] = useState(t.nav.active);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="header">
       <div className="header-inner container">
-        <a href="#" className="logo" onClick={() => setActiveNav(null)}>
+        <a href="#" className="logo" onClick={() => { setActiveNav(null); setMenuOpen(false); }}>
           <img src={IMG.logoHorizontal} alt="Gala Kids Books" className="logo-img" />
         </a>
 
-        <nav className="nav">
+        <button
+          className={`menu-toggle${menuOpen ? " menu-toggle--open" : ""}`}
+          aria-label="Menu"
+          aria-expanded={menuOpen}
+          aria-controls="main-nav"
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          <span /><span /><span />
+        </button>
+
+        <nav id="main-nav" className={`nav${menuOpen ? " nav--open" : ""}`}>
           {t.nav.items.map((item, i) => (
             <a
               key={item}
               href={NAV_HREFS[i] || "#"}
               className={`nav-link${activeNav === item ? " nav-link--active" : ""}`}
-              onClick={(e) => { if (!NAV_HREFS[i]) e.preventDefault(); setActiveNav(item); }}
+              onClick={(e) => { if (!NAV_HREFS[i]) e.preventDefault(); setActiveNav(item); setMenuOpen(false); }}
             >
               {item}
             </a>
