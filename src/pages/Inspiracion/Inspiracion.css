@@ -1,0 +1,479 @@
+/* ===== Pàgina Inspiración (prefix .insp-*) ===== */
+.insp {
+  --insp-purple: #8b5cf6;
+  --insp-sky: #eaf3fb;
+  --insp-radius: 14px;
+  --insp-shadow: 0 6px 20px rgba(29, 45, 90, 0.08);
+  background: var(--white);
+  color: var(--navy);
+  overflow-x: hidden;
+  padding-bottom: 48px;
+}
+
+.insp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Colors utilitaris --- */
+.insp-c-red { color: var(--red); }
+.insp-c-blue { color: var(--blue); }
+.insp-c-yellow { color: var(--yellow); }
+.insp-c-green { color: var(--green); }
+.insp-c-purple { color: var(--insp-purple); }
+.insp-c-orange { color: var(--orange); }
+.insp-c-navy { color: var(--navy); }
+.insp-bg-red { background: #fde3e5; color: var(--red); }
+.insp-bg-blue { background: #dfe9fd; color: var(--blue); }
+.insp-bg-yellow { background: #fef3c7; color: #b7791f; }
+.insp-bg-green { background: #dcfce7; color: var(--green); }
+.insp-bg-purple { background: #ede9fe; color: var(--insp-purple); }
+.insp-bg-orange { background: #ffedd5; color: var(--orange); }
+
+/* --- Decoració --- */
+.insp-star {
+  width: 26px;
+  height: 26px;
+  fill: var(--yellow);
+  stroke: #e0a800;
+  stroke-width: 0.8;
+  flex-shrink: 0;
+}
+.insp-cloud {
+  width: 60px;
+  fill: var(--white);
+  stroke: #7fb3e6;
+  stroke-width: 1.6;
+}
+
+/* --- Títols --- */
+.insp-color-title {
+  font-family: "Caveat", cursive;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+}
+.insp-color-title__line {
+  display: block;
+}
+
+.insp-eyebrow {
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+.insp-section-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 24px;
+}
+.insp-section-title--center {
+  justify-content: center;
+}
+
+/* --- Botons --- */
+.insp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--white);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.insp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--insp-shadow);
+}
+.insp-btn--red { background: var(--red); }
+.insp-btn--navy { background: var(--blue); }
+
+/* ===== 1. HERO ===== */
+.insp-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 40%) minmax(0, 60%);
+  align-items: center;
+  min-height: 480px;
+}
+.insp-hero__content {
+  position: relative;
+  z-index: 2;
+  padding: 64px 24px 48px max(24px, calc((100vw - 1200px) / 2 + 24px));
+}
+.insp-hero .insp-color-title {
+  font-size: clamp(2.6rem, 4.6vw, 4rem);
+  margin-bottom: 24px;
+  width: 135%; /* el títol se superposa lleugerament a la imatge, com a l'esbós */
+}
+.insp-hero__lines {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 0.98rem;
+  margin-bottom: 28px;
+}
+.insp-hero__star1 {
+  position: absolute;
+  top: 24px;
+}
+.insp-hero__cloud {
+  position: absolute;
+  top: 28px;
+  left: 60%;
+}
+.insp-hero__star2 {
+  position: absolute;
+  left: 42%;
+  top: 46%;
+  width: 34px;
+  height: 34px;
+  z-index: 3;
+}
+.insp-hero__media {
+  position: relative;
+  height: 100%;
+  min-height: 480px;
+}
+.insp-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 22%);
+}
+
+/* ===== 2. IDEAS ===== */
+.insp-ideas {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+.insp-ideas__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+.insp-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--insp-radius);
+  overflow: hidden;
+  box-shadow: var(--insp-shadow);
+  transition: transform 0.2s ease;
+}
+.insp-card:hover {
+  transform: translateY(-4px);
+}
+.insp-card__media {
+  position: relative;
+}
+.insp-card__media img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.insp-card__icon {
+  position: absolute;
+  left: 10px;
+  bottom: -18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--white);
+  display: grid;
+  place-items: center;
+}
+.insp-card__icon svg {
+  width: 20px;
+  height: 20px;
+}
+.insp-card__body {
+  padding: 26px 12px 14px;
+}
+.insp-card__body h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.insp-card__text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.insp-card__prep {
+  font-size: 0.72rem;
+  color: var(--navy);
+  opacity: 0.8;
+}
+
+/* ===== 3. DESTACADO ===== */
+.insp-featured {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background: var(--insp-sky);
+  border-radius: var(--insp-radius);
+  overflow: hidden;
+  min-height: 170px;
+  margin: 16px 0 32px;
+}
+.insp-featured--noimg {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+.insp-featured__content {
+  position: relative;
+  padding: 32px 48px 32px 100px;
+}
+.insp-featured--noimg .insp-featured__content {
+  padding: 40px 24px;
+}
+.insp-featured__title {
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  margin-bottom: 12px;
+}
+.insp-featured__content p {
+  font-weight: 600;
+}
+.insp-featured__star1 {
+  position: absolute;
+  top: 22px;
+  left: 40px;
+}
+.insp-featured__star2 {
+  position: absolute;
+  right: 40px;
+  bottom: 30px;
+}
+.insp-featured__cloud {
+  position: absolute;
+  top: 26px;
+  right: 30px;
+}
+.insp-featured__media,
+.insp-featured__media img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ===== 4. FAMILIAS ===== */
+.insp-families {
+  padding-bottom: 32px;
+}
+.insp-families__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.insp-family {
+  position: relative;
+  border-radius: var(--insp-radius);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  box-shadow: var(--insp-shadow);
+}
+.insp-family img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.insp-family:hover img {
+  transform: scale(1.04);
+}
+.insp-family__overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 40px 16px 14px;
+  background: linear-gradient(to top, rgba(29, 45, 90, 0.75), transparent);
+  color: var(--white);
+}
+.insp-family__overlay h3 {
+  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.2;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+.insp-family__overlay p {
+  font-size: 0.8rem;
+  opacity: 0.92;
+  margin-top: 4px;
+}
+
+/* ===== 5. FRASES ===== */
+.insp-quotes {
+  padding-bottom: 40px;
+}
+.insp-quotes__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.insp-quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 8px 28px;
+}
+.insp-quote + .insp-quote {
+  border-left: 1px dashed var(--border);
+}
+.insp-quote svg {
+  width: 34px;
+  height: 34px;
+}
+.insp-quote p {
+  color: var(--navy);
+  font-size: 1rem;
+  line-height: 1.45;
+  max-width: 180px;
+}
+
+/* ===== 6. CTA FINAL ===== */
+.insp-download {
+  display: grid;
+  grid-template-columns: minmax(0, 38%) minmax(0, 62%);
+  align-items: center;
+  background: var(--bg-cream);
+  border-radius: var(--insp-radius);
+  overflow: hidden;
+  min-height: 140px;
+}
+.insp-download__content {
+  padding: 28px 24px 28px 40px;
+}
+.insp-download__title {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  margin-bottom: 10px;
+}
+.insp-download__content p {
+  font-size: 0.9rem;
+  margin-bottom: 18px;
+  max-width: 280px;
+}
+.insp-download__media {
+  height: 100%;
+}
+.insp-download__media img {
+  width: 100%;
+  height: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  object-position: center 40%;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .insp-ideas__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .insp-quotes__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 28px;
+  }
+  .insp-quote:nth-child(3) {
+    border-left: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .insp-hero {
+    grid-template-columns: 1fr;
+  }
+  .insp-hero__media {
+    order: -1;
+    min-height: 0;
+    height: auto;
+  }
+  .insp-hero__media img {
+    aspect-ratio: 3 / 2;
+    -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+  }
+  .insp-hero__content {
+    padding: 8px 24px 32px;
+  }
+  .insp-hero .insp-color-title {
+    width: auto;
+  }
+  .insp-hero__star1,
+  .insp-hero__star2,
+  .insp-hero__cloud {
+    display: none;
+  }
+
+  .insp-featured {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .insp-featured__content {
+    padding: 40px 24px;
+  }
+  .insp-featured__star1 { left: 16px; top: 14px; }
+  .insp-featured__star2 { right: 16px; bottom: 14px; }
+  .insp-featured__cloud { display: none; }
+
+  .insp-families__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .insp-download {
+    grid-template-columns: 1fr;
+  }
+  .insp-download__content {
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .insp-download__content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .insp-download__media img {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .insp-container {
+    padding: 0 16px;
+  }
+  .insp-ideas__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .insp-quotes__list {
+    grid-template-columns: 1fr;
+  }
+  .insp-quote + .insp-quote {
+    border-left: none;
+    border-top: 1px dashed var(--border);
+    padding-top: 24px;
+  }
+  .insp-quote p {
+    max-width: 260px;
+  }
+}

@@ -1,0 +1,480 @@
+/* ===== Pàgina Contacto ===== */
+.contacto {
+  --ct-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --ct-max: 1200px;
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+.ct-serif {
+  font-family: var(--ct-serif);
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.ct-underline::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 3px;
+  background: var(--yellow);
+}
+
+.ct-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.ct-deco {
+  position: absolute;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* ----- Botons ----- */
+.ct-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.ct-btn:hover {
+  transform: translateY(-2px);
+}
+
+.ct-btn--solid {
+  background: #ff3b30;
+  color: var(--white);
+  border: none;
+  padding: 12px 26px;
+  box-shadow: 0 6px 16px rgba(255, 59, 48, 0.25);
+}
+
+.ct-btn--solid:hover {
+  background: var(--red);
+}
+
+.ct-btn--wide {
+  width: 100%;
+  padding: 14px;
+}
+
+.ct-btn--outline {
+  border: 1.5px solid #ff6b5e;
+  color: var(--red);
+  background: var(--white);
+  padding: 8px 32px;
+  font-size: 0.85rem;
+}
+
+.ct-btn--outline:hover {
+  background: #fff1f0;
+}
+
+/* ----- Hero ----- */
+.ct-hero {
+  position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+}
+
+.ct-hero__img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 74%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 22%);
+}
+
+.ct-hero__content {
+  position: relative;
+  z-index: 1;
+  width: min(440px, 42%);
+  margin-left: max(4vw, calc((100vw - var(--ct-max)) / 2));
+  padding: 60px 0;
+}
+
+.ct-deco--star {
+  top: 20px;
+  left: 0;
+  color: var(--yellow);
+  font-size: 1.6rem;
+}
+
+.ct-hero__label {
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.ct-hero__title {
+  font-size: clamp(3rem, 6vw, 4.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin-bottom: 18px;
+}
+
+.ct-hero__dot {
+  color: #b8860b;
+}
+
+.ct-hero__subtitle {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.35;
+  margin-bottom: 18px;
+}
+
+.ct-hero__text {
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.ct-hero__content .ct-btn {
+  margin-top: 14px;
+}
+
+/* ----- Formulari ----- */
+.ct-form-wrap {
+  position: relative;
+  max-width: var(--ct-max);
+  margin: 0 auto;
+  padding: 48px 4vw;
+  background: #fbfaf8;
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: 60px;
+  align-items: center;
+  scroll-margin-top: 80px;
+}
+
+.ct-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ct-form__title {
+  font-family: var(--ct-serif);
+  font-size: 1.7rem;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.ct-heart {
+  color: #f472b6;
+  font-family: sans-serif;
+  font-weight: 400;
+}
+
+.ct-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  border: 1.5px solid #d6d9e0;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--navy);
+  transition: border-color 0.15s ease;
+}
+
+.ct-field:focus-within {
+  border-color: var(--blue);
+}
+
+.ct-field input,
+.ct-field textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--navy);
+  padding: 12px 0;
+}
+
+.ct-field--area {
+  align-items: flex-start;
+  border-radius: 18px;
+}
+
+.ct-field--area .ct-icon {
+  margin-top: 13px;
+}
+
+.ct-field--area textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.ct-form__ok {
+  color: var(--green);
+  font-weight: 700;
+  text-align: center;
+}
+
+.ct-side h3 {
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+}
+
+.ct-side p {
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  max-width: 300px;
+}
+
+/* ----- Altres formes de parlar ----- */
+.ct-other,
+.ct-faq,
+.ct-closing {
+  max-width: var(--ct-max);
+  margin: 0 auto;
+  padding: 56px 4vw 0;
+}
+
+.ct-section-title {
+  text-align: center;
+  font-size: 1.7rem;
+  margin-bottom: 32px;
+}
+
+.ct-section-title.ct-underline::after {
+  margin: 8px auto 0;
+}
+
+.ct-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.ct-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: 0 4px 14px rgba(29, 45, 90, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.ct-card__media {
+  position: relative;
+  aspect-ratio: 16 / 7;
+}
+
+.ct-card__media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ct-card__logo {
+  position: absolute;
+  left: 14px;
+  bottom: -22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  display: grid;
+  place-items: center;
+}
+
+.ct-card__logo img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.ct-card__body {
+  padding: 30px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.ct-card__body h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.ct-card__body p {
+  color: #4b5563;
+  font-size: 0.9rem;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+/* ----- FAQ ----- */
+.ct-faq__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.ct-faq__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.ct-faq__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.ct-faq__icon .ct-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.ct-faq__icon--bag { background: #e8eefc; }
+.ct-faq__icon--globe { background: #f6e8f7; }
+.ct-faq__icon--smile { background: #fdf3d0; color: #ca8a04; }
+.ct-faq__icon--mail { background: #e3f1e5; color: var(--green); }
+
+.ct-faq__text {
+  flex: 1;
+}
+
+.ct-faq__q {
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--navy);
+}
+
+.ct-faq__text p {
+  color: #4b5563;
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+
+.ct-faq__chev {
+  background: none;
+  border: none;
+  color: var(--navy);
+  padding: 4px;
+  align-self: center;
+  transition: transform 0.2s ease;
+}
+
+.ct-faq__item:not(.is-open) .ct-faq__chev {
+  transform: rotate(-90deg);
+}
+
+/* ----- Tancament ----- */
+.ct-closing {
+  position: relative;
+  padding-bottom: 48px;
+  text-align: center;
+}
+
+.ct-closing p {
+  font-size: clamp(1.2rem, 2.3vw, 1.6rem);
+  line-height: 1.4;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.ct-closing .ct-underline::after {
+  margin: 14px auto 0;
+}
+
+.ct-deco--heart {
+  left: 8%;
+  top: 50px;
+  color: #f472b6;
+  font-size: 2.4rem;
+}
+
+.ct-bottom {
+  display: block;
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 900px) {
+  .ct-hero {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ct-hero__img {
+    position: static;
+    width: 100%;
+    height: 300px;
+    order: -1;
+    -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent);
+    mask-image: linear-gradient(to bottom, #000 75%, transparent);
+  }
+
+  .ct-hero__content {
+    width: auto;
+    margin: 0;
+    padding: 24px 16px 40px;
+  }
+
+  .ct-form-wrap {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    border-radius: 0;
+    padding: 40px 16px;
+  }
+
+  .ct-cards,
+  .ct-faq__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ct-other,
+  .ct-faq,
+  .ct-closing {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .ct-deco--heart {
+    display: none;
+  }
+}

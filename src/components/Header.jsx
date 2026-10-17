@@ -3,6 +3,9 @@ import { useLanguage } from "../context/LanguageContext";
 import { IMG } from "../assets/images";
 import "./Header.css";
 
+// Mateix ordre que t.nav.items a tots els idiomes; null = secció sense pàgina encara
+const NAV_HREFS = ["#filosofia", "#inspiracion", "#sobre-nosotros", "#contacto"];
+
 const LANGS = [
   { code: "ca", label: "CAT" },
   { code: "es", label: "ES" },
@@ -17,17 +20,17 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-inner container">
-        <a href="#" className="logo">
+        <a href="#" className="logo" onClick={() => setActiveNav(null)}>
           <img src={IMG.logoHorizontal} alt="Gala Kids Books" className="logo-img" />
         </a>
 
         <nav className="nav">
-          {t.nav.items.map((item) => (
+          {t.nav.items.map((item, i) => (
             <a
               key={item}
-              href="#"
+              href={NAV_HREFS[i] || "#"}
               className={`nav-link${activeNav === item ? " nav-link--active" : ""}`}
-              onClick={(e) => { e.preventDefault(); setActiveNav(item); }}
+              onClick={(e) => { if (!NAV_HREFS[i]) e.preventDefault(); setActiveNav(item); }}
             >
               {item}
             </a>
