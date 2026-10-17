@@ -18,7 +18,28 @@ const AMAZON_URL =
 
 // Dades no traduïbles; els textos són a translations.js (t.aboutUs)
 const GUIA_IMG = ["guia-01.webp", "guia-02.webp", "guia-03.webp", "guia-04.webp"];
-const PROCESO_ICON = ["bulb", "pencil", "heart", "star"];
+const MISION_ICON = ["bulb", "book", "heart"];
+const VALORES_ICON = ["palette", "hand", "heart", "star"];
+
+// TEMPORAL: textos nous (transcrits de l'esbós) pendents que el traductor els passi a t.aboutUs
+const NEW_TEXT = {
+  missionTitle: "Nuestra misión",
+  mission:
+    "Fomentar la imaginación, el aprendizaje y los valores a través de libros diseñados para los más pequeños, con ilustraciones entrañables y actividades que despiertan su curiosidad natural.",
+  missionAlt: "Vaca, pollito y cerdito de Gala Kids",
+  missionItems: [
+    { title: "Imaginación sin límites", text: "Historias y actividades que abren la puerta a mundos llenos de posibilidades." },
+    { title: "Aprendizaje significativo", text: "Contenidos pensados para estimular habilidades clave de forma divertida." },
+    { title: "Momentos que conectan", text: "Libros que invitan a compartir, conversar y crear recuerdos en familia." },
+  ],
+  valuesTitle: "Nuestros valores",
+  values: [
+    { title: "Creatividad", text: "Diseñamos experiencias que estimulan la expresión, la imaginación y el juego libre." },
+    { title: "Calidad", text: "Cuidamos cada detalle: ilustraciones, contenidos y materiales pensados para durar y acompañar." },
+    { title: "Familia", text: "Creemos en el poder del tiempo compartido y en los lazos que se fortalecen leyendo juntos." },
+    { title: "Confianza", text: "Acompañamos a los padres con contenidos seguros, adaptados y pensados para cada etapa." },
+  ],
+};
 
 const ICONS = {
   bulb: (
@@ -32,6 +53,20 @@ const ICONS = {
   ),
   star: (
     <path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" />
+  ),
+  book: (
+    <path d="M3 5.5C5.5 4.5 9 4.5 12 6.5c3-2 6.5-2 9-1V19c-2.5-1-6-1-9 1-3-2-6.5-2-9-1zM12 6.5V20" />
+  ),
+  palette: (
+    <>
+      <path d="M12 3a9 9 0 0 0 0 18c1.4 0 2-1 1.6-2.1-.5-1.3.4-2.4 1.7-2.4H18a3 3 0 0 0 3-3c0-5.5-4-10.5-9-10.5z" />
+      <circle cx="7.5" cy="11" r="1.2" />
+      <circle cx="10" cy="7" r="1.2" />
+      <circle cx="15" cy="7.5" r="1.2" />
+    </>
+  ),
+  hand: (
+    <path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-6.5V4a1.5 1.5 0 0 1 3 0v7m0-5.5a1.5 1.5 0 0 1 3 0V12m0-3.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-4.6-2.2L4.6 15.6a1.6 1.6 0 0 1 2.4-2.1L8 14.5" />
   ),
 };
 
@@ -82,7 +117,6 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
   const { t } = useLanguage();
   const T = t.aboutUs;
   const GUIA = T.guide.map((text, i) => ({ img: GUIA_IMG[i], text }));
-  const PROCESO = T.process.map((text, i) => ({ icon: PROCESO_ICON[i], text }));
   return (
     <div className="about">
       <style>{FONT_FACE}</style>
@@ -99,6 +133,50 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
         <div className="about-hero__media">
           <img src={img("hero.webp")} alt={T.heroAlt} />
         </div>
+      </section>
+
+      {/* NUESTRA MISIÓN */}
+      <section className="about-section about-mission">
+        <img
+          className="about-mission__animals"
+          src={img("vaca.webp")}
+          alt={NEW_TEXT.missionAlt}
+          loading="lazy"
+        />
+        <img className="about-mission__pig" src={img("cerdito.webp")} alt="" loading="lazy" />
+        <div className="about-mission__text">
+          <h2 className="about-h2 about-h2--rays" aria-label={NEW_TEXT.missionTitle}>
+            <Claim text={NEW_TEXT.missionTitle} />
+          </h2>
+          <p>{NEW_TEXT.mission}</p>
+        </div>
+        <ul className="about-mission__card">
+          {NEW_TEXT.missionItems.map((m, i) => (
+            <li key={m.title}>
+              <Icon name={MISION_ICON[i]} className={`about-mission__icon about-mission__icon--${i + 1}`} />
+              <div>
+                <h3>{m.title}</h3>
+                <p>{m.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* NUESTROS VALORES */}
+      <section className="about-section">
+        <h2 className="about-h2 about-h2--center about-h2--rays" aria-label={NEW_TEXT.valuesTitle}>
+          <Claim text={NEW_TEXT.valuesTitle} />
+        </h2>
+        <ul className="about-values">
+          {NEW_TEXT.values.map((v, i) => (
+            <li className="about-values__item" key={v.title}>
+              <Icon name={VALORES_ICON[i]} className={`about-values__icon about-values__icon--${i + 1}`} />
+              <h3>{v.title}</h3>
+              <p>{v.text}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* ¿QUIÉNES SOMOS? */}
@@ -133,37 +211,13 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
         <p className="about-guide__extra">{T.guideExtra}</p>
       </section>
 
-      {/* NUESTRO PROCESO */}
-      <section className="about-section">
-        <h2 className="about-h2 about-h2--center about-h2--rays" aria-label={T.processTitle}>
-          <Claim text={T.processTitle} />
-        </h2>
-        <ol className="about-process">
-          {PROCESO.map((p, i) => (
-            <li className="about-process__step" key={p.icon}>
-              <Icon name={p.icon} className={`about-process__icon about-process__icon--${i + 1}`} />
-              <span className="about-process__num">{i + 1}</span>
-              <p>{p.text}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* NUESTRA PROMESA */}
-      <section className="about-section">
-        <div className="about-promise">
-          <h2 className="about-h2" aria-label={T.promiseTitle}>
-            <Claim text={T.promiseTitle} />
-          </h2>
-          <p>{T.promise}</p>
-        </div>
-      </section>
-
       {/* CIERRE */}
       <section className="about-section">
         <div className="about-close">
           <Icon name="star" className="about-close__deco about-close__deco--star" />
           <Icon name="heart" className="about-close__deco about-close__deco--heart" />
+          <img className="about-close__dino" src={img("dinosaurio.webp")} alt="" loading="lazy" />
+          <img className="about-close__cow" src={img("vaca.webp")} alt="" loading="lazy" />
           <h2 className="about-close__title" aria-label={T.closeTitle}>
             <Claim text={T.closeTitle} byWord />
           </h2>
