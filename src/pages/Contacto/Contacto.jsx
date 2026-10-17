@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { IMG } from "../../assets/images";
 import "./Contacto.css";
 
@@ -80,7 +80,25 @@ const T = {
   closing: "Cada mensaje que recibimos nos recuerda que detrás de cada libro hay una familia como la tuya.",
 };
 
-const TITLE_COLORS = ["#e63946", "#f97316", "#fbbf24", "#16a34a", "#2563eb", "#7c3aed", "#ec4899", "#e05a44"];
+// Paleta del claim de la home (TITULO.png): --ct-claim-1..7 a Contacto.css
+const CLAIM_COLORS = 7;
+
+// Pinta cada lletra amb un color cíclic de la paleta, com a la home.
+// Cada paraula va en un <span> perquè no es trenqui a mitja paraula; la puntuació va en navy.
+function Claim({ text, offset = 0 }) {
+  let n = offset;
+  return text.split(" ").map((word, w) => (
+    <Fragment key={w}>
+      {w > 0 && " "}
+      <span className="ct-claim-word">
+        {[...word].map((c, i) => {
+          const color = /[.,;:!?¿¡]/.test(c) ? "var(--ct-claim-7)" : `var(--ct-claim-${(n++ % CLAIM_COLORS) + 1})`;
+          return <span key={i} style={{ color }}>{c}</span>;
+        })}
+      </span>
+    </Fragment>
+  ));
+}
 
 const ICONS = {
   user: <><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></>,
@@ -139,10 +157,7 @@ export default function Contacto() {
           <span className="ct-deco ct-deco--star">★</span>
           <p className="ct-hero__label">{T.label}</p>
           <h1 className="ct-hero__title">
-            {[...T.title].map((c, i) => (
-              <span key={i} style={{ color: TITLE_COLORS[i % TITLE_COLORS.length] }}>{c}</span>
-            ))}
-            <span className="ct-hero__dot">.</span>
+            <Claim text={`${T.title}.`} />
           </h1>
           <p className="ct-hero__subtitle">{T.subtitle}</p>
           <p className="ct-hero__text">{T.text1}</p>
@@ -157,13 +172,9 @@ export default function Contacto() {
       <section className="ct-form-wrap" id="ct-form">
         <form className="ct-form" onSubmit={onSubmit}>
           <h2 className="ct-form__title">
-            <span className="ct-rainbow">
-              {[...T.formTitleA].map((c, i) => (
-                <span key={i} style={{ color: TITLE_COLORS[i % TITLE_COLORS.length] }}>{c}</span>
-              ))}
-            </span>
+            <Claim text={T.formTitleA} />
             <br />
-            {T.formTitleB} <span className="ct-heart">♡</span>
+            <Claim text={T.formTitleB} offset={T.formTitleA.length} /> <span className="ct-heart">♡</span>
           </h2>
 
           {FIELDS.map((f) => (
@@ -194,7 +205,7 @@ export default function Contacto() {
 
       {/* ALTRES FORMES */}
       <section className="ct-other">
-        <h2 className="ct-serif ct-section-title">{T.otherTitle}</h2>
+        <h2 className="ct-serif ct-section-title"><Claim text={T.otherTitle} /></h2>
         <div className="ct-cards">
           {T.cards.map((c) => (
             <article key={c.key} className="ct-card">
@@ -216,7 +227,7 @@ export default function Contacto() {
 
       {/* FAQ */}
       <section className="ct-faq">
-        <h2 className="ct-serif ct-section-title ct-underline">{T.faqTitle}</h2>
+        <h2 className="ct-serif ct-section-title ct-underline"><Claim text={T.faqTitle} /></h2>
         <div className="ct-faq__grid">
           {T.faqs.map((f, i) => (
             <div key={i} className={`ct-faq__item ${open[i] ? "is-open" : ""}`}>
@@ -238,7 +249,7 @@ export default function Contacto() {
       {/* TANCAMENT */}
       <section className="ct-closing">
         <span className="ct-deco ct-deco--heart">♡</span>
-        <p className="ct-serif ct-underline">{T.closing}</p>
+        <p className="ct-serif ct-underline"><Claim text={T.closing} /></p>
       </section>
 
       <img className="ct-bottom" src={pic("inferior.webp")} alt="" loading="lazy" />
