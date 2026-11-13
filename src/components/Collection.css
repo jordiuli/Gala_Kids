@@ -112,3 +112,7 @@
     display: none;
   }
 }
+
+.collection-card-link {
+  display: block;
+}

@@ -4,13 +4,13 @@ import { IMG } from "../assets/images";
 import "./Collection.css";
 
 const BOOKS = [
-  { file: "granja.webp", title: "Animales de granja" },
-  { file: "vehiculos.webp", title: "Vehículos de trabajo" },
-  { file: "dinosaurios.webp", title: "Dinosaurios adorables" },
-  { file: "monster-trucks.webp", title: "Monster Trucks" },
-  { file: "unicornios.webp", title: "Unicornios adorables" },
-  { file: "halloween-activity-book.webp", title: "Halloween in Action – Activity Book" },
-  { file: "halloween-coloring-book.webp", title: "Halloween in Action – Coloring Book" },
+  { file: "granja.webp", title: "Animales de granja", url: "https://www.amazon.es/dp/B0H59B2QZ8" },
+  { file: "vehiculos.webp", title: "Vehículos de trabajo", url: "https://www.amazon.es/dp/B0H59DGRL2" },
+  { file: "dinosaurios.webp", title: "Dinosaurios adorables", url: "https://www.amazon.es/dp/B0H58D3KG9" },
+  { file: "monster-trucks.webp", title: "Monster Trucks", url: "https://www.amazon.es/dp/B0H59DF8K6" },
+  { file: "unicornios.webp", title: "Unicornios adorables", url: "https://www.amazon.es/dp/B0H58SWX4F" },
+  { file: "halloween-activity-book.webp", title: "Halloween in Action – Activity Book", url: "https://www.amazon.es/dp/B0HLDYFB84" },
+  { file: "halloween-coloring-book.webp", title: "Halloween in Action – Coloring Book", url: "https://www.amazon.es/dp/B0HG893MCB" },
 ];
 
 const bookSrc = (file) => `${import.meta.env.BASE_URL}img/coleccion/${file}`;
@@ -40,9 +40,15 @@ export default function Collection() {
           ‹
         </button>
         <ul className="collection-track" ref={trackRef}>
-          {BOOKS.map(({ file, title }) => (
+          {BOOKS.map(({ file, title, url }) => (
             <li key={file} className="collection-card">
-              <img src={bookSrc(file)} alt={title} loading="lazy" />
+              {url ? (
+                <a href={url} target="_blank" rel="noopener noreferrer" className="collection-card-link">
+                  <img src={bookSrc(file)} alt={title} loading="lazy" />
+                </a>
+              ) : (
+                <img src={bookSrc(file)} alt={title} loading="lazy" />
+              )}
             </li>
           ))}
         </ul>
