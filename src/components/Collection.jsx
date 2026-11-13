@@ -44,7 +44,7 @@ const BOOKS = [
     }
   },
   {
-    id: "halloweenActivity", file: "halloween-activity-book.webp", age: "4-8", url: {
+    id: "halloweenActivity", file: "halloween-activity-book.webp", age: "4-5", url: {
       es: "https://www.amazon.es/dp/B0HLDYFB84",
       en: "https://www.amazon.com/dp/B0HL6LCB6D",
       //fr: "https://www.amazon.fr/dp/", //Falta activity book en francès
