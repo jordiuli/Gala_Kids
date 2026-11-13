@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import "./AboutUs.css";
 import { useLanguage } from "../../context/LanguageContext";
+import { AMAZON_STORE, localizedUrl } from "../../config/links";
 
 const base = import.meta.env.BASE_URL;
 const img = (file) => `${base}img/about_us/${file}`;
@@ -13,8 +14,6 @@ const FONT_FACE = `@font-face {
   font-display: swap;
 }`;
 
-const AMAZON_URL =
-  "https://www.amazon.es/stores/Gala-Stone/author/B0H6TD32HX?ref=sr_ntt_srch_lnk_13&shoppingPortalEnabled=true";
 
 // Dades no traduïbles; els textos són a translations.js (t.aboutUs)
 const GUIA_IMG = ["guia-01.webp", "guia-02.webp", "guia-03.webp", "guia-04.webp"];
@@ -128,8 +127,9 @@ function Icon({ name, className }) {
   );
 }
 
-export default function AboutUs({ ctaHref = AMAZON_URL }) {
-  const { t } = useLanguage();
+export default function AboutUs({ ctaHref }) {
+  const { t, lang } = useLanguage();
+  const href = ctaHref ?? localizedUrl(AMAZON_STORE, lang);
   const T = t.aboutUs;
   const GUIA = T.guide.map((text, i) => ({ img: GUIA_IMG[i], text }));
   return (
@@ -237,7 +237,7 @@ export default function AboutUs({ ctaHref = AMAZON_URL }) {
             <StackedClaim text={T.closeTitle} />
           </h2>
           <p>{T.closeText}</p>
-          <a className="about-close__btn" href={ctaHref} target="_blank" rel="noopener noreferrer">
+          <a className="about-close__btn" href={href} target="_blank" rel="noopener noreferrer">
             {T.cta} →
           </a>
         </div>
