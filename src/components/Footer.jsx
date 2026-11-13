@@ -1,15 +1,16 @@
 import { useLanguage } from "../context/LanguageContext";
 import { IMG } from "../assets/images";
+import { AMAZON_STORE, localizedUrl } from "../config/links";
 import "./Footer.css";
 
 const SOCIAL = [
   { src: IMG.pinterestBN, label: "Pinterest", href: "https://es.pinterest.com/galakids/" },
   { src: IMG.instagramBN, label: "Instagram", href: "https://instagram.com/galakidsbooks/" },
-  { src: IMG.amazonBN, label: "Amazon", href: "https://www.amazon.es/stores/Gala-Stone/author/B0H6TD32HX?ref=sr_ntt_srch_lnk_13&shoppingPortalEnabled=true" },
+  { src: IMG.amazonBN, label: "Amazon", href: AMAZON_STORE },
 ];
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const f = t.footer;
 
   return (
@@ -38,11 +39,14 @@ export default function Footer() {
         <div className="footer-col">
           <h4 className="footer-col-heading">{f.cols[3].heading}</h4>
           <div className="footer-social">
-            {SOCIAL.map(({ src, label, href }) => (
+            {SOCIAL.map(({ src, label, href: hrefs }) => {
+              const href = localizedUrl(hrefs, lang);
+              return (
               <a key={label} href={href} className="footer-social-icon" aria-label={label} target={href !== "#" ? "_blank" : undefined} rel={href !== "#" ? "noopener noreferrer" : undefined}>
                 <img src={src} alt={label} className="footer-social-img" />
               </a>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

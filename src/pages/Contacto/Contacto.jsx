@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { IMG } from "../../assets/images";
 import { useLanguage } from "../../context/LanguageContext";
+import { AMAZON_STORE, localizedUrl } from "../../config/links";
 import "./Contacto.css";
 
 const base = import.meta.env.BASE_URL;
@@ -14,15 +15,13 @@ const FONT_FACE = `@font-face {
   font-display: swap;
 }`;
 
-const AMAZON_URL =
-  "https://www.amazon.es/stores/Gala-Stone/author/B0H6TD32HX?ref=sr_ntt_srch_lnk_13&shoppingPortalEnabled=true";
 const PINTEREST_URL = "https://es.pinterest.com/galakids/";
 const INSTAGRAM_URL = "#"; // pendent
 const CONTACT_EMAIL = ""; // pendent: si s'informa, el formulari obre el client de correu (mailto)
 
 // Dades no traduïbles de les targetes i FAQ; els textos són a translations.js (t.contacto)
 const CARD_MEDIA = [
-  { key: "amazon", url: AMAZON_URL, img: pic("amazon.webp"), logo: IMG.amazon },
+  { key: "amazon", url: AMAZON_STORE, img: pic("amazon.webp"), logo: IMG.amazon },
   { key: "pinterest", url: PINTEREST_URL, img: pic("pinterest.webp"), logo: IMG.pinterest },
   { key: "instagram", url: INSTAGRAM_URL, img: pic("instagram.webp"), logo: IMG.instagram },
 ];
@@ -84,10 +83,10 @@ const FIELDS = [
 ];
 
 export default function Contacto() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const T = {
     ...t.contacto,
-    cards: t.contacto.cards.map((c, i) => ({ ...c, ...CARD_MEDIA[i] })),
+    cards: t.contacto.cards.map((c, i) => ({ ...c, ...CARD_MEDIA[i], url: localizedUrl(CARD_MEDIA[i].url, lang) })),
     faqs: t.contacto.faqs.map((f, i) => ({ ...f, icon: FAQ_ICONS[i] })),
   };
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
