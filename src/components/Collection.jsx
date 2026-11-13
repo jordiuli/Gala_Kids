@@ -38,7 +38,7 @@ const BOOKS = [
   {
     file: "unicornios.webp", title: "Unicornios adorables", url: {
       es: "https://www.amazon.es/dp/B0H58SWX4F",
-      en: "https://www.amazon.com/dp/", //Falta a amazon
+      //en: "https://www.amazon.com/dp/", //Falta a amazon
       fr: "https://www.amazon.fr/dp/B0H7RMZ222",
     }
   },
@@ -46,7 +46,7 @@ const BOOKS = [
     file: "halloween-activity-book.webp", title: "Halloween in Action – Activity Book", url: {
       es: "https://www.amazon.es/dp/B0HLDYFB84",
       en: "https://www.amazon.com/dp/B0HL6LCB6D",
-      fr: "https://www.amazon.fr/dp/", //Falta activity book en francès
+      //fr: "https://www.amazon.fr/dp/", //Falta activity book en francès
     }
   },
   {
