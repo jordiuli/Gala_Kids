@@ -53,7 +53,7 @@ const BOOKS = [
     file: "halloween-coloring-book.webp", title: "Halloween in Action – Coloring Book", url: {
       es: "https://www.amazon.es/dp/B0HG893MCB",
       en: "https://www.amazon.com/dp/B0HG8RKFJS",
-      fr: "https://www.amazon.fr/dp/", // Falta llibre a Amazon
+      fr: "https://www.amazon.fr/dp/B0HG823MNL",
     }
   },
 ];
