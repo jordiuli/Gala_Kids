@@ -1,0 +1,8 @@
+# Dependències (la GitHub Action fa npm install)
+node_modules/
+
+# Build (la GitHub Action el genera i el publica)
+dist/
+
+# Originals de treball de les imatges (la web fa servir public/img/)
+img/
